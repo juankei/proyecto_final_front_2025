@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true">
+  <!-- Contenedor de preguntas y respuestas -->
+  <div class="quiz-container">
+
+    <!-- Mover el div.scores fuera de la iteración de preguntas -->
+    <div *ngFor="let user of user_data" class="username">
+       <ion-label>{{user.username}}</ion-label>
+    </div>
+
+    <div class="score" >
+    <ion-input [(ngModel)]="score"  ></ion-input>
+    </div>
+
+    <!-- Iteración de las preguntas -->
+    <div *ngFor="let question of question_data" class="question-section">
+
+      <!-- Barra de progreso -->
+      <ion-progress-bar [value]="progress"></ion-progress-bar>
+
+      <!-- Texto de la pregunta -->
+      <div class="question-title">
+        {{ question.texto_pregunta }}
+      </div>
+
+      <!-- Opciones de respuesta -->
+      <div class="answer-options">
+        <ion-button color="{{color_incorrect}}" class="answer-button" (click)="answerQuestion('incorrect_answer')" [disabled]="isDisabled">
+          {{ question.opcion_1 }}
+        </ion-button>
+        <ion-button color="{{color_correct}}" class="answer-button" (click)="answerQuestion('correct_answer')" [disabled]="isDisabled">
+          {{ question.respuesta_correcta }}
+        </ion-button>
+        <ion-button color="{{color_incorrect}}" class="answer-button" (click)="answerQuestion('incorrect_answer')" [disabled]="isDisabled">
+          {{ question.opcion_3 }}
+        </ion-button>
+        <ion-button color="{{color_incorrect}}" class="answer-button" (click)="answerQuestion('incorrect_answer')" [disabled]="isDisabled">
+          {{ question.opcion_2 }}
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>

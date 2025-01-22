@@ -1,0 +1,25 @@
+<ion-content [fullscreen]="true">
+
+  <!-- Contenedor para el formulario de entrada de username -->
+  <div class="start-button-container">
+    <ion-item class="username">
+      
+      <ion-input label="username" placeholder="Enter username" [(ngModel)]="username"></ion-input>
+
+      <!-- Botón para enviar el username a la base de datos o backend -->
+      <ion-button color="dark" (click)="addUser()">
+        <ion-icon name="checkmark-sharp"></ion-icon>
+      </ion-button>
+      
+    </ion-item>
+  </div>
+
+  <!-- Contenedor para el botón de inicio del juego -->
+  <div class="start-button-container">
+    <!-- Botón para navegar a la pantalla de preguntas (question1) -->
+    <ion-button (click)="navigateToQuestion1()" expand="block" class="start-button">
+      Start Game
+    </ion-button>
+  </div>
+
+</ion-content>

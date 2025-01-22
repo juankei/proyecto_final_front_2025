@@ -1,0 +1,134 @@
+/* Estilo para el ion-content */
+ion-content {
+    --background: linear-gradient(180deg, #f9f9f9, #e0f7fa); /* Fondo claro con toque vibrante */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333; /* Texto oscuro para buena legibilidad */
+    font-family: 'Poppins', Arial, sans-serif; /* Fuente moderna y dinámica */
+    position: relative; /* Necesario para el contenido dentro */
+    height: 100vh; /* Asegura que ion-content ocupe todo el alto de la pantalla */
+    justify-content: center; /* Centra el contenido verticalmente */
+  }
+  
+  /* Estilo para la clase username */
+  
+  
+  /* Estilo para los scores (nombre de usuario) */
+  .username {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: left; /* Alineación a la izquierda */
+    margin-bottom: 10px;
+    margin-right: 20px; /* Se añade margen a la derecha */
+    display: flex; /* Usamos flex para asegurarnos de que el contenido se alinee correctamente */
+    justify-content: flex-end; /* Alinea el texto hacia la derecha */
+    align-items: center; /* Asegura que se centre verticalmente si es necesario */
+    width: auto; /* El ancho es automático según el contenido */
+    position: absolute; /* Se posiciona absolutamente en relación con el contenedor padre */
+    top: 0; /* Se asegura que se quede en la parte superior */
+    right: 0; /* Alineación a la derecha */
+    padding: 10px; /* Añadimos algo de relleno */
+    border-radius: 15px;
+    border-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  }
+  
+  .score{
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: left; /* Alineación a la izquierda */
+    margin-bottom: 10px;
+    margin-right: 20px; /* Se añade margen a la derecha */
+    display: flex; /* Usamos flex para asegurarnos de que el contenido se alinee correctamente */
+   
+    align-items: center; /* Asegura que se centre verticalmente si es necesario */
+    width: auto; /* El ancho es automático según el contenido */
+    position: absolute; /* Se posiciona absolutamente en relación con el contenedor padre */
+    top: 0; /* Se asegura que se quede en la parte superior */
+    
+    padding: 10px; /* Añadimos algo de relleno */
+    border-radius: 15px;
+    border-color: #333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  }
+  
+  /* Contenedor principal */
+  .quiz-container {
+    width: 100%;
+    max-width: 800px; /* Aumentamos el tamaño máximo del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Espaciado entre preguntas */
+    align-items: center; /* Asegura que el contenido dentro del contenedor esté centrado */
+    justify-content: flex-start; /* Asegura que se empiece desde el top */
+    padding: 50px; /* Añadimos algo de relleno al contenedor */
+    background: white; /* Fondo blanco para que destaque */
+    border-radius: 15px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    position: relative; /* Necesario para posicionar el username dentro */
+  }
+  
+  /* Sección de cada pregunta */
+  .question-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Espaciado entre pregunta y opciones */
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  }
+  
+  /* Título de la pregunta */
+  .question-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+    text-align: center; /* Centra el texto */
+    margin-bottom: 10px;
+    display: flex; /* Usamos flex para asegurarnos de que el contenido se alinee correctamente */
+    justify-content: center; /* Centra el texto horizontalmente */
+    align-items: center; /* Centra el texto verticalmente si es necesario */
+    width: 100%; /* Asegura que el título ocupe todo el ancho del contenedor */
+  }
+  
+  /* Opciones de respuesta */
+  .answer-options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* Espaciado entre botones */
+  }
+  
+  .answer-button {
+    --background: #ffca28; /* Amarillo vibrante */
+    color: #333;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 15px 20px;
+    border-radius: 10px;
+    text-transform: uppercase;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 300px; /* Para que no sean excesivamente anchos */
+  }
+  
+  .answer-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  }
+  
+  .answer-button[color="color_correct"] {
+    --background: #4caf50; /* Verde para respuestas correctas */
+  }
+  
+  .answer-button[color="color_incorrect"] {
+    --background: #f44336; /* Rojo para respuestas incorrectas */
+  }
+  

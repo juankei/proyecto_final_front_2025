@@ -1,0 +1,14 @@
+<ion-content [fullscreen]="true">
+  <!-- Lista de puntuaciones -->
+  <div *ngFor="let score of score_data" class="username">
+    <!-- Usamos ion-list para contener los elementos -->
+    <ion-list lines="none" class="score-list">
+      <!-- Cada ítem dentro de la lista -->
+      <ion-item>
+        <ion-label class="username-label">{{ score.usuario_id }}</ion-label>
+        <ion-label class="score-label">{{ score.puntos }}</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+</ion-content>
+

@@ -1,0 +1,49 @@
+ion-content {
+    --background: linear-gradient(180deg, #f9f9f9, #e0f7fa); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    color: #333;
+    font-family: 'Poppins', Arial, sans-serif; 
+  }
+  
+  .username{
+    --background: #29b6f6; /* Azul vibrante */
+    --border-radius: 12px;
+    font-size: 1.3rem;
+    padding: 14px 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    align-items: center;
+  }
+  
+  /* Botón de empezar */
+  .start-button-container {
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .start-button {
+    --background: #29b6f6; /* Azul vibrante */
+    --border-radius: 12px;
+    font-size: 1.3rem;
+    padding: 14px 20px;
+    color: white;
+    font-weight: bold;
+    text-transform: uppercase;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .start-button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Efecto hover */
+  }
+    
+   
