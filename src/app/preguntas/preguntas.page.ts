@@ -119,19 +119,38 @@ nextquestion(){
     this.input_data = response; 
     if (this.input_data && this.input_data.length > 0) {
       this.question_data = this.input_data; 
+      this.randomQuestions();
     }});
 }
 
 
-
-randomQuestions(){
-  this.http.get(`${this.url}/answers/${this.questionNumber}`).subscribe((response) => {
-    console.log(response); 
-    this.input_answers = response; 
-    if (this.input_answers && this.input_answers.length > 0) {
-      this.answers_data = this.input_data; 
-    }});
+shuffleArray(array: any[]): any[] {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
 }
+
+
+
+randomQuestions() {
+  this.http.get(`${this.url}/answers/${this.questionNumber}`).subscribe((response: any) => {
+    console.log(response);
+    if (response && response.length > 0) {
+      const question = response[0]; // Suponiendo que solo hay una pregunta por ID
+      this.answers_data = this.shuffleArray([
+        question.opcion_1,
+        question.respuesta_correcta,
+        question.opcion_2,
+        question.opcion_3
+      ]);
+    }
+    console.log(this.answers_data);
+  });
+}
+
+
 
 
 pause (){
@@ -149,46 +168,30 @@ this.Questions();
 
   // Función para manejar la respuesta seleccionada por el usuario
   answerQuestion(input_answer: string) {
+    const correctAnswer = this.question_data[0]?.respuesta_correcta;
     if (input_answer == 'correct_answer') {
       this.color_correct = 'success'; // Si la respuesta es correcta, asigna el color de éxito
-      
-      if(this.progress <= 0.2){
-        this.score+= 3000
-        this.isDisabled = true
+      if (this.progress <= 0.2) {
+        this.score += 3000;
+      } else if (this.progress <= 0.40) {
+        this.score += 2000;
+      } else if (this.progress <= 0.60) {
+        this.score += 1000;
+      } else if (this.progress <= 0.80) {
+        this.score += 500;
+      } else if (this.progress <= 1) {
+        this.score += 100;
       }
-
-      if(this.progress <= 0.20){
-        this.score+= 2000
-        this.isDisabled = true
-      }
-
-      if(this.progress <= 0.40){
-        this.score+= 1000
-        this.isDisabled = true
-      }
-
-      if(this.progress <= 0.60){
-        this.score+= 500
-        this.isDisabled = true
-      }
-
-      if(this.progress <= 0.80){
-        this.score+= 300
-        this.isDisabled = true
-      }
-
-      
-      if(this.progress <= 1){
-        this.score+= 100
-        this.isDisabled = true
-      }
-      
+      this.isDisabled = true;
+       
     } else {
       this.color_incorrect = 'danger'; // Si la respuesta es incorrecta, asigna el color de peligro
       this.color_correct = 'success'; // También muestra la respuesta correcta
-      this.isDisabled = true
+      this.isDisabled = true;
     }
   }
+  
+
 
 
   showusername(){
@@ -215,6 +218,7 @@ this.Questions();
   ngOnInit() {
     this.firstQuestion(); // Llama a la función para obtener la primera pregunta
     this.showusername()
+    this.randomQuestions()
    
   }
 

@@ -8,7 +8,7 @@
     </div>
 
     <div class="score" >
-    <ion-input [(ngModel)]="score"  ></ion-input>
+    <ion-input [(ngModel)]="score"></ion-input>
     </div>
 
     <!-- Iteración de las preguntas -->
@@ -22,19 +22,14 @@
         {{ question.texto_pregunta }}
       </div>
 
-      <!-- Opciones de respuesta -->
       <div class="answer-options">
-        <ion-button color="{{color_incorrect}}" class="answer-button" (click)="answerQuestion('incorrect_answer')" [disabled]="isDisabled">
-          {{ question.opcion_1 }}
-        </ion-button>
-        <ion-button color="{{color_correct}}" class="answer-button" (click)="answerQuestion('correct_answer')" [disabled]="isDisabled">
-          {{ question.respuesta_correcta }}
-        </ion-button>
-        <ion-button color="{{color_incorrect}}" class="answer-button" (click)="answerQuestion('incorrect_answer')" [disabled]="isDisabled">
-          {{ question.opcion_3 }}
-        </ion-button>
-        <ion-button color="{{color_incorrect}}" class="answer-button" (click)="answerQuestion('incorrect_answer')" [disabled]="isDisabled">
-          {{ question.opcion_2 }}
+        <ion-button 
+          *ngFor="let option of answers_data" 
+          [color]="option === question_data[0]?.respuesta_correcta ? color_correct : color_incorrect" 
+          class="answer-button" 
+          (click)="answerQuestion(option === question_data[0]?.respuesta_correcta ? 'correct_answer' : 'incorrect_answer')" 
+          [disabled]="isDisabled">
+          {{ option }}
         </ion-button>
       </div>
     </div>
