@@ -33,7 +33,7 @@ export class PuntuacionPage implements OnInit {
  
     setTimeout(() => {
       this.router.navigate(['/preguntas']); 
-    }, 10000); 
+    }, 1000); 
   }
 
   score (){

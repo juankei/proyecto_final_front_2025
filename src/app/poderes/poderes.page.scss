@@ -1,0 +1,71 @@
+/* Aseguramos que ion-content ocupe toda la pantalla */
+ion-content {
+    --background: linear-gradient(180deg, #f9f9f9, #e0f7fa); /* Fondo claro con toque vibrante */
+    height: 100vh; /* Asegura que ion-content ocupe toda la altura de la pantalla */
+    padding: 0; /* Elimina cualquier padding adicional */
+    color: #333; /* Color del texto oscuro */
+    font-family: 'Poppins', Arial, sans-serif; /* Fuente moderna */
+    position: relative; /* Para manejar el posicionamiento del contenido */
+  }
+  
+  /* Contenedor principal */
+  .content-wrapper {
+    width: 80%; /* Ajusta el ancho del contenedor principal */
+    max-width: 800px; /* Limita el ancho máximo */
+    padding: 30px;
+    background: white; /* Fondo blanco para el contenido */
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra suave */
+    text-align: center; /* Alineación de texto centrado */
+    
+    /* Aquí usamos margin-top y margin-left para centrar el contenedor */
+    position: absolute; /* Para poder controlar el posicionamiento de manera absoluta */
+    top: 50%; /* Posicionamos el contenedor a la mitad de la pantalla */
+    left: 50%; /* Posicionamos el contenedor a la mitad de la pantalla */
+    transform: translate(-50%, -50%); /* Usamos transform para mover el contenedor hacia arriba y a la izquierda */
+  }
+  
+  /* Estilo para el mensaje de poder */
+  .power-message {
+    background: #ffca28; /* Amarillo vibrante de fondo */
+    color: #333; /* Color del texto oscuro para contraste */
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    max-width: 90%;
+    text-align: center;
+    margin-bottom: 30px; /* Espacio entre este mensaje y el resto */
+    
+  }
+  
+  /* Título del mensaje de poder */
+  /* Título del mensaje de poder */
+.power-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ffcb00; /* Color dorado */
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  text-align: center; /* Asegura que el título esté centrado */
+}
+
+/* Subtítulo del mensaje de poder */
+.power-subtitle {
+  font-size: 1.6rem;
+  font-weight: normal;
+  color: #ff6347; /* Color rojo */
+  text-align: center; /* Asegura que el subtítulo esté centrado */
+}
+  
+  /* Media Query para pantallas más pequeñas */
+  @media (max-width: 768px) {
+    .power-title {
+      font-size: 1.6rem;
+    }
+  
+    .power-subtitle {
+      font-size: 1.3rem;
+    }
+  }
+  
+  

@@ -5,6 +5,9 @@ import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
+import { flag } from 'ionicons/icons';
+import { addIcons } from 'ionicons';
+import { personCircle } from 'ionicons/icons';
 
 @Component({
   selector: 'app-preguntas',
@@ -33,6 +36,9 @@ export class PreguntasPage implements OnInit {
   public interval : any
   public answers_data :any = []
   public input_answers :any
+  public correct_answers_row : number = 4
+  public power_score : boolean = false
+  public isButtonVisible : boolean = false
 
 
 
@@ -75,30 +81,26 @@ export class PreguntasPage implements OnInit {
 
 
 
-      if (this.questionNumber == 6  ) {
+      if (this.correct_answers_row == 5 ) {
         // Pausa el juego
         this.addScore()
         this.pause();
-        this.router.navigate(['/puntuacion']); // Navega a la página de puntuación
-        
-        // Espera 10 segundos para reiniciar el juego
+        this.isButtonVisible = true
+
+       // Espera 10 segundos para reiniciar el juego
         setTimeout(() => {
-          this.questionNumber++
-          this.restart(); // Reinicia el juego
-        }, 10000); // 10 segundos (10,000 ms)
+         this.restart(); // Reinicia el juego
+        this.correct_answers_row = 0
+        this.power_score = true
+        
+          
+        }, 1000); // 10 segundos (10,000 ms)
+
+       
       }
 
 
-      if (this.questionNumber == 10) {
-        // Pausa el juego
-        this.pause();
-        this.router.navigate(['/puntuacion']); // Navega a la página de puntuación
-        
-        // Espera 10 segundos para reiniciar el juego
-        setTimeout(() => {
-          this.restart(); // Reinicia el juego
-        }, 10000); // 10 segundos (10,000 ms)
-      }
+     
 
 
     }, 50);  //La función se ejecuta cada 50ms para actualizar el progreso
@@ -155,11 +157,14 @@ randomQuestions() {
 
 pause (){
  clearInterval(this.counter)
+
+ 
 }
 
 
 restart (){
 this.Questions();
+this.questionNumber++
   
 }
 
@@ -168,27 +173,34 @@ this.Questions();
 
   // Función para manejar la respuesta seleccionada por el usuario
   answerQuestion(input_answer: string) {
+
     const correctAnswer = this.question_data[0]?.respuesta_correcta;
     if (input_answer == 'correct_answer') {
-      this.color_correct = 'success'; // Si la respuesta es correcta, asigna el color de éxito
+      this.color_correct = 'success'; // Si la respuesta es correcta
+      this.correct_answers_row++
       if (this.progress <= 0.2) {
-        this.score += 3000;
       } else if (this.progress <= 0.40) {
-        this.score += 2000;
+        this.score += 1;
       } else if (this.progress <= 0.60) {
-        this.score += 1000;
+        this.score += 1;
       } else if (this.progress <= 0.80) {
-        this.score += 500;
+        this.score += 1;
       } else if (this.progress <= 1) {
-        this.score += 100;
+        this.score += 1;
+      } else if (this.power_score == true ){
+        this.score = this.score * 2
       }
       this.isDisabled = true;
        
     } else {
-      this.color_incorrect = 'danger'; // Si la respuesta es incorrecta, asigna el color de peligro
+      this.correct_answers_row = 0
+      this.color_incorrect = 'danger'; // Si la respuesta es incorrecta
       this.color_correct = 'success'; // También muestra la respuesta correcta
       this.isDisabled = true;
     }
+
+    
+
   }
   
 
@@ -215,11 +227,15 @@ this.Questions();
       console.log(response); // Muestra la respuesta del servidor
     });
   }
+
+  
   ngOnInit() {
     this.firstQuestion(); // Llama a la función para obtener la primera pregunta
     this.showusername()
     this.randomQuestions()
-   
+   this.score = 0
   }
+
+  
 
 }

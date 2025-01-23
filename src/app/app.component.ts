@@ -19,7 +19,8 @@ export class AppComponent {
   public appPages = [
     { title: 'home', url: '/home', icon: 'home' },
     { title: 'preguntas', url: '/preguntas', icon: 'help' },
-    { title: 'puntuacion', url: '/puntuacion', icon: 'help' }
+    { title: 'puntuacion', url: '/puntuacion', icon: 'help' },
+    { title: 'poderes', url: '/poderes', icon: 'help' }
   
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
