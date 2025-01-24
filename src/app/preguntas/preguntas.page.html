@@ -37,28 +37,25 @@
 
 
 
-  <ion-button *ngIf="isButtonVisible" id="open-custom-dialog" expand="block" (click)="pause()">Open Custom Dialog</ion-button>
-
-  <ion-modal id="example-modal" #modal trigger="open-custom-dialog">
-    <ng-template>
-      <div class="wrapper">
-        <h1>Dialog header</h1>
-
-        <ion-list lines="none">
-          <ion-item button="true" detail="false" (click)="modal.dismiss()">
-            <ion-icon name="person-circle"></ion-icon>
-            <ion-label>Item 1</ion-label>
+  <ion-button  (click)="pause()" id="open-modal" expand="block">Open</ion-button>
+    <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
+      <ng-template>
+        <ion-header>
+          <ion-toolbar>
+            <ion-title>Modal</ion-title>
+            <ion-buttons slot="end">
+              <ion-button (click)="closeModal()">Close</ion-button>
+            </ion-buttons>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <p class="ion-padding-horizontal">You must accept the terms and conditions to close this modal.</p>
+          <ion-item>
+            <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)" [checked]="canDismiss">
+              <div class="ion-text-wrap" [(ngModel)]="Doble puntuacion"></div>
+            </ion-checkbox>
           </ion-item>
-          <ion-item button="true" detail="false" (click)="modal.dismiss()">
-            <ion-icon name="person-circle"></ion-icon>
-            <ion-label>Item 2</ion-label>
-          </ion-item>
-          <ion-item button="true" detail="false" (click)="modal.dismiss()">
-            <ion-icon name="person-circle"></ion-icon>
-            <ion-label>Item 3</ion-label>
-          </ion-item>
-        </ion-list>
-      </div>
-    </ng-template>
-  </ion-modal>
+        </ion-content>
+      </ng-template>
+    </ion-modal>
 </ion-content>

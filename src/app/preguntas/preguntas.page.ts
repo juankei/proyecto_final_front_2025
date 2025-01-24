@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ViewChild  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { flag } from 'ionicons/icons';
-import { addIcons } from 'ionicons';
-import { personCircle } from 'ionicons/icons';
-
+import { ModalController } from '@ionic/angular';
+import {CheckboxCustomEvent,} from '@ionic/angular/standalone';
+import { IonModal } from '@ionic/angular';
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.page.html',
@@ -17,8 +16,8 @@ import { personCircle } from 'ionicons/icons';
   imports: [ CommonModule, FormsModule,IonicModule]
 })
 export class PreguntasPage implements OnInit {
-
-  constructor(private navController: NavController, private http: HttpClient,private router: Router) { }
+  @ViewChild(IonModal) modal!: IonModal;
+  constructor(private navController: NavController, private http: HttpClient,private router: Router,private modalController: ModalController) { }
 
   // Propiedades de la clase
   public url: string = 'http://localhost:3000'; // URL de la API donde se obtienen las preguntas
@@ -79,20 +78,18 @@ export class PreguntasPage implements OnInit {
       }
 
 
-
+     
 
       if (this.correct_answers_row == 5 ) {
         // Pausa el juego
+        this.isButtonVisible = true
         this.addScore()
         this.pause();
-        this.isButtonVisible = true
-
-       // Espera 10 segundos para reiniciar el juego
+        // Espera 10 segundos para reiniciar el juego
         setTimeout(() => {
-         this.restart(); // Reinicia el juego
-        this.correct_answers_row = 0
-        this.power_score = true
-        
+            this.closeModal(); // Reinicia el juego
+            this.correct_answers_row = 0
+            this.power_score = true
           
         }, 1000); // 10 segundos (10,000 ms)
 
@@ -104,15 +101,10 @@ export class PreguntasPage implements OnInit {
 
 
     }, 50);  //La función se ejecuta cada 50ms para actualizar el progreso
-          
-          
-        
-       
+    }
 
-   
-   
-  
-}
+
+    
 
 
 nextquestion(){
@@ -157,15 +149,16 @@ randomQuestions() {
 
 pause (){
  clearInterval(this.counter)
-
- 
 }
-
 
 restart (){
 this.Questions();
 this.questionNumber++
-  
+}
+
+closeModal() {
+  this.modal.dismiss();  // Esto cierra el modal desde el TypeScript
+  this.restart()
 }
 
   public color_correct: string = ''; // Color de la respuesta correcta
@@ -228,12 +221,23 @@ this.questionNumber++
     });
   }
 
+
+
+
   
   ngOnInit() {
     this.firstQuestion(); // Llama a la función para obtener la primera pregunta
     this.showusername()
     this.randomQuestions()
    this.score = 0
+  }
+
+  canDismiss = false;
+
+  presentingElement!: HTMLElement | null;
+
+  onTermsChanged(event: CheckboxCustomEvent) {
+    this.canDismiss = event.detail.checked;
   }
 
   
