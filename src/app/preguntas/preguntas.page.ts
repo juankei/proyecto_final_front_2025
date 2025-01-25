@@ -1,4 +1,4 @@
-import { Component, OnInit,ViewChild  } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
@@ -6,240 +6,210 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import {CheckboxCustomEvent,} from '@ionic/angular/standalone';
+import { CheckboxCustomEvent } from '@ionic/angular/standalone';
 import { IonModal } from '@ionic/angular';
+
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.page.html',
   styleUrls: ['./preguntas.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule,IonicModule]
+  imports: [CommonModule, FormsModule, IonicModule],
 })
 export class PreguntasPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
-  constructor(private navController: NavController, private http: HttpClient,private router: Router,private modalController: ModalController) { }
 
-  // Propiedades de la clase
-  public url: string = 'http://localhost:3000'; // URL de la API donde se obtienen las preguntas
-  public input_data: any; // Variable para almacenar la respuesta de la API
-  public input_user : any
-  public user_data: any = []
-  public question_data: any = []; // Almacena los datos de la pregunta actual
+  // URL de la API
+  public url: string = 'http://localhost:3000';
+
+  // Variables de datos
+  public input_data: any; // Datos de las preguntas
+  public input_user: any; // Información del usuario
+  public user_data: any = []; // Lista de usuarios
+  public question_data: any = []; // Pregunta actual
+
+  // Variables de control
   public progress = 0; // Progreso de la barra de carga
-  public counter: any; // Contador para la progresión del tiempo
+  public counter: any; // Contador para la barra de carga
   public questionNumber = 1; // Número de la pregunta actual
-  public puntuacion: number = 0; // Puntuación total del jugador
-  public score: number = 0; // Puntaje actual del jugador
-  public isDisabled: boolean = false; 
-  public pauseinterval : boolean = false
-  public interval : any
-  public answers_data :any = []
-  public input_answers :any
-  public correct_answers_row : number = 4
-  public power_score : boolean = false
-  public isButtonVisible : boolean = false
+  public puntuacion: number = 0; // Puntuación total
+  public score: number = 0; // Puntaje del jugador
+  public isDisabled: boolean = false; // Estado de los botones
+  public pauseinterval: boolean = false; // Control del intervalo
+  public interval: any; // Variable para manejar el intervalo
+  public answers_data: any = []; // Respuestas posibles de la pregunta
+  public input_answers: any; // Respuesta seleccionada
+  public correct_answers_row: number = 4; // Respuestas correctas consecutivas
+  public power_score: boolean = false; // Modo de puntaje doble
+  public isButtonVisible: boolean = false; // Control de visibilidad del botón
 
+  // Colores para las respuestas
+  public color_correct: string = ''; // Color de respuesta correcta
+  public color_incorrect: string = ''; // Color de respuesta incorrecta
 
+  // Constructor con inyección de dependencias
+  constructor(
+    private navController: NavController,
+    private http: HttpClient,
+    private router: Router,
+    private modalController: ModalController
+  ) {}
 
-  firstQuestion(){
-    this.http.get(`${this.url}/pregunta1`).subscribe((response) => {
-      console.log(response); 
-      this.input_data = response; 
-      if (this.input_data && this.input_data.length > 0) {
-        this.question_data = this.input_data; 
-      }
-    });
-    this.Questions()
+  // Inicializa el componente y obtiene los datos iniciales
+  ngOnInit() {
+    this.firstQuestion(); // Carga la primera pregunta
+    this.showusername(); // Muestra el nombre del usuario
+    this.randomQuestions(); // Carga las respuestas aleatorias
+    this.score = 0; // Reinicia el puntaje
   }
 
-  // Función que maneja el inicio del juego
+  // Carga la primera pregunta desde la API
+  firstQuestion() {
+    this.http.get(`${this.url}/pregunta1`).subscribe((response) => {
+      console.log(response);
+      this.input_data = response;
+      if (this.input_data && this.input_data.length > 0) {
+        this.question_data = this.input_data;
+      }
+    });
+    this.Questions(); // Inicia el manejo del progreso
+  }
+
+  // Maneja el progreso del juego y el cambio de preguntas
   Questions() {
-
-    // Inicia un contador para simular el progreso del tiempo
     this.counter = setInterval(() => {
-      this.firstQuestion
-      this.progress += 0.01; // Aumenta el progreso cada 50ms
+      this.progress += 0.01; // Incrementa el progreso
 
-      // Si el progreso llega a 100%, pasa a la siguiente pregunta
+      // Cuando el progreso llega al 100%, pasa a la siguiente pregunta
       if (this.progress >= 1) {
         this.questionNumber++; // Incrementa el número de la pregunta
-
-        // Cuando se cambia de pregunta, se reinicia el progreso y se obtiene la nueva pregunta
         setTimeout(() => {
-          this.progress = 0; // Reinicia el progreso a 0
-          this.nextquestion()
+          this.progress = 0; // Reinicia el progreso
+          this.nextquestion(); // Carga la siguiente pregunta
 
-          // Resetea los colores de las respuestas previas
+          // Resetea los colores y desbloquea los botones
           this.color_correct = '';
           this.color_incorrect = '';
           this.isDisabled = false;
-
         });
       }
 
+      // Si se logran 5 respuestas correctas consecutivas
+      if (this.correct_answers_row == 5) {
+        this.isButtonVisible = true; // Muestra el botón especial
+        this.addScore(); // Guarda el puntaje
+        this.pause(); // Pausa el juego
 
-     
-
-      if (this.correct_answers_row == 5 ) {
-        // Pausa el juego
-        this.isButtonVisible = true
-        this.addScore()
-        this.pause();
-        // Espera 10 segundos para reiniciar el juego
+        // Reinicia el juego después de 1 segundo
         setTimeout(() => {
-            this.closeModal(); // Reinicia el juego
-            this.correct_answers_row = 0
-            this.power_score = true
-          
-        }, 1000); // 10 segundos (10,000 ms)
-
-       
+          this.closeModal();
+          this.correct_answers_row = 0; // Reinicia el contador de respuestas correctas
+          this.power_score = true; // Activa el modo de puntaje doble
+        }, 1000);
       }
-
-
-     
-
-
-    }, 50);  //La función se ejecuta cada 50ms para actualizar el progreso
-    }
-
-
-    
-
-
-nextquestion(){
-  this.http.get(`${this.url}/pregunta/${this.questionNumber}`).subscribe((response) => {
-    console.log(response); 
-    this.input_data = response; 
-    if (this.input_data && this.input_data.length > 0) {
-      this.question_data = this.input_data; 
-      this.randomQuestions();
-    }});
-}
-
-
-shuffleArray(array: any[]): any[] {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    }, 50); // Intervalo de 50ms
   }
-  return array;
-}
 
+  // Carga la siguiente pregunta desde la API
+  nextquestion() {
+    this.http.get(`${this.url}/pregunta/${this.questionNumber}`).subscribe((response) => {
+      console.log(response);
+      this.input_data = response;
+      if (this.input_data && this.input_data.length > 0) {
+        this.question_data = this.input_data;
+        this.randomQuestions(); // Actualiza las respuestas aleatorias
+      }
+    });
+  }
 
-
-randomQuestions() {
-  this.http.get(`${this.url}/answers/${this.questionNumber}`).subscribe((response: any) => {
-    console.log(response);
-    if (response && response.length > 0) {
-      const question = response[0]; // Suponiendo que solo hay una pregunta por ID
-      this.answers_data = this.shuffleArray([
-        question.opcion_1,
-        question.respuesta_correcta,
-        question.opcion_2,
-        question.opcion_3
-      ]);
+  // Baraja un arreglo para generar respuestas aleatorias
+  shuffleArray(array: any[]): any[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    console.log(this.answers_data);
-  });
-}
+    return array;
+  }
 
+  // Carga respuestas aleatorias para la pregunta actual
+  randomQuestions() {
+    this.http.get(`${this.url}/answers/${this.questionNumber}`).subscribe((response: any) => {
+      console.log(response);
+      if (response && response.length > 0) {
+        const question = response[0]; // Supone una pregunta por ID
+        this.answers_data = this.shuffleArray([
+          question.opcion_1,
+          question.respuesta_correcta,
+          question.opcion_2,
+          question.opcion_3,
+        ]);
+      }
+    });
+  }
 
+  // Pausa el contador
+  pause() {
+    clearInterval(this.counter);
+  }
 
+  // Reinicia el contador y pasa a la siguiente pregunta
+  restart() {
+    this.Questions();
+    this.questionNumber++;
+  }
 
-pause (){
- clearInterval(this.counter)
-}
+  // Cierra el modal
+  closeModal() {
+    this.modal.dismiss(); // Cierra el modal
+    this.restart(); // Reinicia el juego
+  }
 
-restart (){
-this.Questions();
-this.questionNumber++
-}
-
-closeModal() {
-  this.modal.dismiss();  // Esto cierra el modal desde el TypeScript
-  this.restart()
-}
-
-  public color_correct: string = ''; // Color de la respuesta correcta
-  public color_incorrect: string = ''; // Color de la respuesta incorrecta
-
-  // Función para manejar la respuesta seleccionada por el usuario
+  // Maneja la respuesta del usuario
   answerQuestion(input_answer: string) {
-
     const correctAnswer = this.question_data[0]?.respuesta_correcta;
     if (input_answer == 'correct_answer') {
-      this.color_correct = 'success'; // Si la respuesta es correcta
-      this.correct_answers_row++
-      if (this.progress <= 0.2) {
-      } else if (this.progress <= 0.40) {
-        this.score += 1;
-      } else if (this.progress <= 0.60) {
-        this.score += 1;
-      } else if (this.progress <= 0.80) {
-        this.score += 1;
-      } else if (this.progress <= 1) {
-        this.score += 1;
-      } else if (this.power_score == true ){
-        this.score = this.score * 2
+      this.color_correct = 'success'; // Respuesta correcta
+      this.correct_answers_row++;
+
+      if (this.power_score) {
+        this.score *= 2; // Aplica el puntaje doble
+      } else {
+        this.score += 1; // Incrementa el puntaje
       }
-      this.isDisabled = true;
-       
+      this.isDisabled = true; // Desactiva los botones
     } else {
-      this.correct_answers_row = 0
-      this.color_incorrect = 'danger'; // Si la respuesta es incorrecta
-      this.color_correct = 'success'; // También muestra la respuesta correcta
+      this.correct_answers_row = 0; // Resetea el contador de respuestas correctas
+      this.color_incorrect = 'danger'; // Respuesta incorrecta
+      this.color_correct = 'success'; // Muestra la respuesta correcta
       this.isDisabled = true;
     }
-
-    
-
   }
-  
 
-
-
-  showusername(){
+  // Muestra el nombre del usuario desde la API
+  showusername() {
     this.http.get(`${this.url}/showusername/`).subscribe((response) => {
-      console.log(response); 
-      this.input_user = response; 
+      console.log(response);
+      this.input_user = response;
       if (this.input_user && this.input_user.length > 0) {
-        this.user_data = this.input_user; // 
-        console.log()
+        this.user_data = this.input_user;
       }
     });
-
   }
-  
-  addScore() {
-    let score = {
-      score: this.score
-    };
 
+  // Envía el puntaje actual a la API
+  addScore() {
+    let score = { score: this.score };
     this.http.post(`${this.url}/addScore`, score).subscribe((response) => {
-      console.log(response); // Muestra la respuesta del servidor
+      console.log(response);
     });
   }
 
-
-
-
-  
-  ngOnInit() {
-    this.firstQuestion(); // Llama a la función para obtener la primera pregunta
-    this.showusername()
-    this.randomQuestions()
-   this.score = 0
-  }
-
+  // Propiedades relacionadas con el modal
   canDismiss = false;
-
   presentingElement!: HTMLElement | null;
 
+  // Cambia el estado del modal al aceptar los términos
   onTermsChanged(event: CheckboxCustomEvent) {
     this.canDismiss = event.detail.checked;
   }
-
-  
-
 }

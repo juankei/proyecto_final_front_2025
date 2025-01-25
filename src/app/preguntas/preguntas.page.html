@@ -1,15 +1,16 @@
 <ion-content [fullscreen]="true">
+  <!-- Contenedor principal para mostrar los scores -->
+  <div class="header-info">
+    <div class="username">
+      <ion-label>{{ user_data[0]?.username }}</ion-label>
+    </div>
+    <div class="score">
+      <ion-label>{{ score }}</ion-label>
+    </div>
+  </div>
+
   <!-- Contenedor de preguntas y respuestas -->
   <div class="quiz-container">
-
-    <!-- Mover el div.scores fuera de la iteración de preguntas -->
-    <div *ngFor="let user of user_data" class="username">
-       <ion-label>{{user.username}}</ion-label>
-    </div>
-
-    <div class="score" >
-    <ion-input [(ngModel)]="score"></ion-input>
-    </div>
 
     <!-- Iteración de las preguntas -->
     <div *ngFor="let question of question_data" class="question-section">
@@ -17,11 +18,12 @@
       <!-- Barra de progreso -->
       <ion-progress-bar [value]="progress"></ion-progress-bar>
 
-      <!-- Texto de la pregunta -->
+      <!-- Título de la pregunta -->
       <div class="question-title">
         {{ question.texto_pregunta }}
       </div>
 
+      <!-- Opciones de respuestas -->
       <div class="answer-options">
         <ion-button 
           *ngFor="let option of answers_data" 
@@ -32,30 +34,34 @@
           {{ option }}
         </ion-button>
       </div>
-    </div>
-  </div>
 
+    </div> <!-- Fin de la sección de preguntas -->
 
+  </div> <!-- Fin del contenedor de preguntas -->
 
-  <ion-button  (click)="pause()" id="open-modal" expand="block">Open</ion-button>
-    <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
-      <ng-template>
-        <ion-header>
-          <ion-toolbar>
-            <ion-title>Modal</ion-title>
-            <ion-buttons slot="end">
-              <ion-button (click)="closeModal()">Close</ion-button>
-            </ion-buttons>
-          </ion-toolbar>
-        </ion-header>
-        <ion-content>
-          <p class="ion-padding-horizontal">You must accept the terms and conditions to close this modal.</p>
-          <ion-item>
-            <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)" [checked]="canDismiss">
-              <div class="ion-text-wrap" [(ngModel)]="Doble puntuacion"></div>
-            </ion-checkbox>
-          </ion-item>
-        </ion-content>
-      </ng-template>
-    </ion-modal>
+  <!-- Botón para abrir el modal -->
+  <ion-button (click)="pause()" id="open-modal" expand="block" class="open-btn">Open</ion-button>
+
+  <!-- Modal para mostrar términos y condiciones -->
+  <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Modal</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="closeModal()">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content>
+        <p class="ion-padding-horizontal">You must accept the terms and conditions to close this modal.</p>
+        <ion-item>
+          <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)" [checked]="canDismiss">
+            <div class="ion-text-wrap"></div>
+          </ion-checkbox>
+        </ion-item>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
 </ion-content>

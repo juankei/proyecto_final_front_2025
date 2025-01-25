@@ -1,25 +1,23 @@
 <ion-content [fullscreen]="true">
+  <div class="content-wrapper">
+    <!-- Título del juego -->
+    <h1>The Quiz League</h1>
+  
+    <!-- Contenedor para el formulario de entrada de username -->
+    <div class="username-container">
+      <ion-item class="username">
+        <ion-input label="Username" placeholder="Enter username" [(ngModel)]="username"></ion-input>
+        <ion-button color="dark" (click)="addUser()">
+          <ion-icon name="checkmark-sharp"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </div>
 
-  <!-- Contenedor para el formulario de entrada de username -->
-  <div class="start-button-container">
-    <ion-item class="username">
-      
-      <ion-input label="username" placeholder="Enter username" [(ngModel)]="username"></ion-input>
-
-      <!-- Botón para enviar el username a la base de datos o backend -->
-      <ion-button color="dark" (click)="addUser()">
-        <ion-icon name="checkmark-sharp"></ion-icon>
+    <!-- Contenedor para el botón de inicio del juego -->
+    <div class="start-button-container">
+      <ion-button (click)="navigateToQuestion1()" expand="block" class="start-button">
+        Start Game
       </ion-button>
-      
-    </ion-item>
+    </div>
   </div>
-
-  <!-- Contenedor para el botón de inicio del juego -->
-  <div class="start-button-container">
-    <!-- Botón para navegar a la pantalla de preguntas (question1) -->
-    <ion-button (click)="navigateToQuestion1()" expand="block" class="start-button">
-      Start Game
-    </ion-button>
-  </div>
-
 </ion-content>

@@ -1,49 +1,78 @@
 ion-content {
-    --background: linear-gradient(180deg, #f9f9f9, #e0f7fa); 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    color: #333;
-    font-family: 'Poppins', Arial, sans-serif; 
-  }
-  
-  .username{
-    --background: #29b6f6; /* Azul vibrante */
-    --border-radius: 12px;
-    font-size: 1.3rem;
-    padding: 14px 20px;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    align-items: center;
-  }
-  
-  /* Botón de empezar */
-  .start-button-container {
-    margin-bottom: 30px;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .start-button {
-    --background: #29b6f6; /* Azul vibrante */
-    --border-radius: 12px;
-    font-size: 1.3rem;
-    padding: 14px 20px;
-    color: white;
-    font-weight: bold;
-    text-transform: uppercase;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-  }
-  
-  .start-button:hover {
-    transform: scale(1.05);
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Efecto hover */
-  }
-    
-   
+  --background: linear-gradient(180deg, #f9f9f9, #e0f7fa);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 0;
+  font-family: 'Poppins', Arial, sans-serif;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 500px; /* Ajuste para limitar el tamaño máximo */
+  padding: 20px;
+  position: absolute; /* Para poder controlar el posicionamiento de manera absoluta */
+  top: 40%; /* Posicionamos el contenedor a la mitad de la pantalla */
+  left: 50%; /* Posicionamos el contenedor a la mitad de la pantalla */
+  transform: translate(-50%, -50%); /* Usamos transform para mover el contenedor hacia arriba y a la izquierda */
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo ligeramente blanco para contraste */
+  border-radius: 15px; /* Bordes redondeados para suavizar */
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave para el contenedor */
+}
+
+h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.username-container {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.username {
+  --background: #29b6f6;
+  --border-radius: 12px;
+  font-size: 1.2rem;
+  padding: 14px 20px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  align-items: center;
+}
+
+.start-button-container {
+  width: 100%;
+  margin-top: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.start-button {
+  --background: #29b6f6;
+  --border-radius: 12px;
+  font-size: 1.3rem;
+  padding: 14px 20px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.start-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
+}
+
