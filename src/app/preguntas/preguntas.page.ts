@@ -27,6 +27,7 @@ export class PreguntasPage implements OnInit {
   public input_user: any; // Información del usuario
   public user_data: any = []; // Lista de usuarios
   public question_data: any = []; // Pregunta actual
+ 
 
   // Variables de control
   public progress = 0; // Progreso de la barra de carga
@@ -39,13 +40,17 @@ export class PreguntasPage implements OnInit {
   public interval: any; // Variable para manejar el intervalo
   public answers_data: any = []; // Respuestas posibles de la pregunta
   public input_answers: any; // Respuesta seleccionada
-  public correct_answers_row: number = 4; // Respuestas correctas consecutivas
-  public power_score: boolean = false; // Modo de puntaje doble
-  public isButtonVisible: boolean = false; // Control de visibilidad del botón
+  public correct_answers_row: number = 3; // Respuestas correctas consecutivas
+
+  public isButtonVisible: boolean = true; // Control de visibilidad del botón
+  //public doubleScore : boolean = false
 
   // Colores para las respuestas
   public color_correct: string = ''; // Color de respuesta correcta
   public color_incorrect: string = ''; // Color de respuesta incorrecta
+
+  public double_points: number = 1 // Para doble puntuación
+  public counter_double_points : any
 
   // Constructor con inyección de dependencias
   constructor(
@@ -96,17 +101,20 @@ export class PreguntasPage implements OnInit {
 
       // Si se logran 5 respuestas correctas consecutivas
       if (this.correct_answers_row == 5) {
-        this.isButtonVisible = true; // Muestra el botón especial
+        this.isButtonVisible = false; // Muestra el botón especial
         this.addScore(); // Guarda el puntaje
-        this.pause(); // Pausa el juego
+       this.openModal() 
 
         // Reinicia el juego después de 1 segundo
         setTimeout(() => {
+          this.selectPower
           this.closeModal();
           this.correct_answers_row = 0; // Reinicia el contador de respuestas correctas
-          this.power_score = true; // Activa el modo de puntaje doble
+          ; // Activa el modo de puntaje doble
         }, 1000);
       }
+
+      
     }, 50); // Intervalo de 50ms
   }
 
@@ -136,7 +144,7 @@ export class PreguntasPage implements OnInit {
     this.http.get(`${this.url}/answers/${this.questionNumber}`).subscribe((response: any) => {
       console.log(response);
       if (response && response.length > 0) {
-        const question = response[0]; // Supone una pregunta por ID
+        const question = response[0];  
         this.answers_data = this.shuffleArray([
           question.opcion_1,
           question.respuesta_correcta,
@@ -164,6 +172,12 @@ export class PreguntasPage implements OnInit {
     this.restart(); // Reinicia el juego
   }
 
+  openModal() {
+    this.pause(); // Pausa el juego
+    this.modal.present();
+
+  }
+
   // Maneja la respuesta del usuario
   answerQuestion(input_answer: string) {
     const correctAnswer = this.question_data[0]?.respuesta_correcta;
@@ -171,17 +185,45 @@ export class PreguntasPage implements OnInit {
       this.color_correct = 'success'; // Respuesta correcta
       this.correct_answers_row++;
 
-      if (this.power_score) {
-        this.score *= 2; // Aplica el puntaje doble
-      } else {
-        this.score += 1; // Incrementa el puntaje
+      if (this.progress <= 0.2) {
+        this.score = 2 * this.double_points + this.score;
+      } else if (this.progress <= 0.40) {
+        this.score = 4 * this.double_points + this.score;
+      } else if (this.progress <= 0.60) {
+        this.score = 6 * this.double_points + this.score;
+      } else if (this.progress <= 0.80) {
+        this.score = 8 * this.double_points + this.score;
+      } else if (this.progress <= 1) {
+        this.score = 10*this.double_points + this.score;
       }
+   
       this.isDisabled = true; // Desactiva los botones
     } else {
       this.correct_answers_row = 0; // Resetea el contador de respuestas correctas
       this.color_incorrect = 'danger'; // Respuesta incorrecta
       this.color_correct = 'success'; // Muestra la respuesta correcta
       this.isDisabled = true;
+    }
+  }
+
+  selectPower(input_power:string){
+    if (input_power  == 'doubleScore') {
+      this.double_points = 2
+    }
+    console.log("poder activo papuuu")
+   this.counter_double_points = setInterval(() => {
+    clearInterval(this.counter_double_points)
+    this.double_points = 1
+    console.log('poder inactivo')
+  
+  }, 15000);
+
+  
+  
+
+
+    if (input_power == 'other'){
+
     }
   }
 
@@ -211,5 +253,6 @@ export class PreguntasPage implements OnInit {
   // Cambia el estado del modal al aceptar los términos
   onTermsChanged(event: CheckboxCustomEvent) {
     this.canDismiss = event.detail.checked;
+    this.pause(); // Pausa el juego
   }
 }

@@ -27,8 +27,10 @@
       <div class="answer-options">
         <ion-button 
           *ngFor="let option of answers_data" 
-          [color]="option === question_data[0]?.respuesta_correcta ? color_correct : color_incorrect" 
+          [color]=
+          "option === question_data[0]?.respuesta_correcta ? color_correct : color_incorrect" 
           class="answer-button" 
+
           (click)="answerQuestion(option === question_data[0]?.respuesta_correcta ? 'correct_answer' : 'incorrect_answer')" 
           [disabled]="isDisabled">
           {{ option }}
@@ -40,10 +42,10 @@
   </div> <!-- Fin del contenedor de preguntas -->
 
   <!-- Botón para abrir el modal -->
-  <ion-button (click)="pause()" id="open-modal" expand="block" class="open-btn">Open</ion-button>
+ 
 
   <!-- Modal para mostrar términos y condiciones -->
-  <ion-modal #modal trigger="open-modal" [canDismiss]="canDismiss" [presentingElement]="presentingElement">
+  <ion-modal   [canDismiss]="canDismiss" [presentingElement]="presentingElement">
     <ng-template>
       <ion-header>
         <ion-toolbar>
@@ -54,10 +56,10 @@
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <p class="ion-padding-horizontal">You must accept the terms and conditions to close this modal.</p>
+        <p class="ion-padding-horizontal">Poder.</p>
         <ion-item>
-          <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)" [checked]="canDismiss">
-            <div class="ion-text-wrap"></div>
+          <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)" [checked]="canDismiss" (click)="selectPower('doubleScore')">
+           <ion-label >Doble puntuacion</ion-label>
           </ion-checkbox>
         </ion-item>
       </ion-content>
