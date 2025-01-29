@@ -5,12 +5,20 @@ import { IonicRouteStrategy, provideIonicAngular } from '@ionic/angular/standalo
 import { routes } from './app/app.routes';
 import { AppComponent } from './app/app.component';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAuth0 } from '@auth0/auth0-angular';
 
 bootstrapApplication(AppComponent, {
   providers: [
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     provideIonicAngular(),
     provideRouter(routes, withPreloading(PreloadAllModules)),
-    provideHttpClient()
+    provideHttpClient(),
+    provideAuth0({
+      domain: 'dev-v1cdzbeeqnm4rfie.eu.auth0.com',
+      clientId: 'FRMnlnWE6NEKeD1zzCI279eYTPUd56EY',
+      authorizationParams: {
+        redirect_uri: window.location.origin
+      }
+    }),
   ],
 });
