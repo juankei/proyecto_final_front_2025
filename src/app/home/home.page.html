@@ -1,13 +1,17 @@
 <ion-content [fullscreen]="true">
+
+  
+
   <div class="content-wrapper">
     <!-- Título del juego -->
+    <img src={{auth_user.picture}} alt="">
     <h1>The Quiz League</h1>
   
     <!-- Contenedor para el formulario de entrada de username -->
     <div class="username-container">
       <ion-item class="username">
         <ion-input label="Username" placeholder="Enter username" [(ngModel)]="username"></ion-input>
-        <ion-button color="dark" (click)="addUser()">
+        <ion-button color="dark" (click)="addUsername()">
           <ion-icon name="checkmark-sharp"></ion-icon>
         </ion-button>
       </ion-item>

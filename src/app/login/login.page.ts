@@ -16,8 +16,15 @@ export class LoginPage implements OnInit {
   constructor(private auth: AuthService, @Inject(DOCUMENT) public document: Document) { }
 
   login() {
-    this.auth.loginWithRedirect();
-}
+
+  
+
+    this.auth.loginWithRedirect({
+      appState: {
+        target: '/home'
+      }
+    });
+  }
 
 logout(){
   this.auth.logout ({
@@ -27,7 +34,15 @@ logout(){
   })
 }
 
-  ngOnInit() {
-  }
+
+
+
+
+ngOnInit() {
+
 
 }
+}
+
+
+

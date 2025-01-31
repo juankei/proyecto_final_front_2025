@@ -58,10 +58,19 @@
       <ion-content>
         <p class="ion-padding-horizontal">Poder.</p>
         <ion-item>
-          <ion-checkbox id="terms" (ionChange)="onTermsChanged($event)" [checked]="canDismiss" (click)="selectPower('doubleScore')">
-           <ion-label >Doble puntuacion</ion-label>
-          </ion-checkbox>
+          <ion-checkbox id="termsDoubleScore" (ionChange)="onTermsChanged('doubleScore',$event)" [checked]="canDismiss" (click)="selectPower('doubleScore')">
+            <ion-label>Doble puntuacion</ion-label>
+         </ion-checkbox>
         </ion-item>
+         
+        <ion-item>
+         <ion-checkbox id="termsAyudita" (ionChange)="onTermsChanged('ayudita', $event)" [checked]="canDismiss" (click)="selectPower('Ayudita')">
+            <ion-label>Ayudita</ion-label>
+         </ion-checkbox>
+        </ion-item> 
+          
+            
+       
       </ion-content>
     </ng-template>
   </ion-modal>

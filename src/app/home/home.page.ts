@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth0/auth0-angular';
+import { AuthGuard } from '@auth0/auth0-angular';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ import { AuthService } from '@auth0/auth0-angular';
   imports: [IonicModule, CommonModule, FormsModule]
 })
 export class HomePage implements OnInit {
-  constructor( private http: HttpClient, private router: Router, private auth: AuthService) { }
+  constructor( private http: HttpClient, private router: Router, private auth: AuthService,private navController: NavController,) { }
 
   public user_name: any
   // URL del backend donde se enviará la información
@@ -24,15 +25,45 @@ export class HomePage implements OnInit {
   // Variable para almacenar el nombre de usuario
   public username: string = '';
 
+  public auth_user: any;
+  public db_user: any;
+
   ngOnInit() {
-    this.auth.user$.subscribe((data) => {
-      this.user_name = data
-      console.log(this.user_name)
+    // Cargar información de usuario desde auth
+    this.auth.user$.subscribe((data: any) =>{
+      this.auth_user = data
+      console.log(this.auth_user);
+      this.loadUser()
     });
   }
 
+  loadUser(){
+    this.http.get(`http://localhost:3000/user/${this.auth_user.email}`).subscribe((response) => {
+      console.log(response);
+      this.db_user = response;
+      if(response = 'usuario no encontrado'){
+        this.createUser();
+      
+      }
+    });
+  }
+
+  createUser(){
+
+    
+    const users = {
+      id : this.auth_user.email,
+      nombre_usuario: this.auth_user.name
+    };
+    
+    this.http.post('http://localhost:3000/adduser', users).subscribe((response) => {
+      console.log(response);
+    });
+  }
+
+
   // Función para enviar el username al backend
-  addUser() {
+  addUsername() {
     const user = {
       username: this.username
     };

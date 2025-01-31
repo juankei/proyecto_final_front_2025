@@ -21,7 +21,7 @@ export class AppComponent {
     { title: 'preguntas', url: '/preguntas', icon: 'help' },
     { title: 'puntuacion', url: '/puntuacion', icon: 'help' },
     { title: 'poderes', url: '/poderes', icon: 'help' },
-    { title: 'login', url: '/login', icon: 'help' }
+     { title: 'login', url: '/login', icon: 'help' }
   
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];

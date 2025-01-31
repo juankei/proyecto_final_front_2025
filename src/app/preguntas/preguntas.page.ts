@@ -101,7 +101,7 @@ export class PreguntasPage implements OnInit {
 
       // Si se logran 5 respuestas correctas consecutivas
       if (this.correct_answers_row == 5) {
-        this.isButtonVisible = false; // Muestra el botón especial
+
         this.addScore(); // Guarda el puntaje
        this.openModal() 
 
@@ -109,7 +109,7 @@ export class PreguntasPage implements OnInit {
         setTimeout(() => {
           this.selectPower
           this.closeModal();
-          this.correct_answers_row = 0; // Reinicia el contador de respuestas correctas
+          this.correct_answers_row = 6; // Reinicia el contador de respuestas correctas
           ; // Activa el modo de puntaje doble
         }, 1000);
       }
@@ -220,9 +220,7 @@ export class PreguntasPage implements OnInit {
 
   
   
-
-
-    if (input_power == 'other'){
+  if (input_power == 'Ayudita'){
 
     }
   }
@@ -247,12 +245,33 @@ export class PreguntasPage implements OnInit {
   }
 
   // Propiedades relacionadas con el modal
-  canDismiss = false;
+  canDismiss = false; // control general para el modal
   presentingElement!: HTMLElement | null;
+  
+  doubleScoreSelected = false;
+  ayuditaSelected = false;
 
   // Cambia el estado del modal al aceptar los términos
-  onTermsChanged(event: CheckboxCustomEvent) {
-    this.canDismiss = event.detail.checked;
-    this.pause(); // Pausa el juego
+  onTermsChanged(power: string, event: any) {
+    const isChecked = event.detail.checked;
+
+    // Si seleccionas uno, desmarcamos el otro
+    if (power === 'doubleScore') {
+      this.doubleScoreSelected = isChecked;
+      if (isChecked) {
+        this.ayuditaSelected = false;  // Deseleccionamos el otro checkbox
+      }
+    } else if (power === 'ayudita') {
+      this.ayuditaSelected = isChecked;
+      if (isChecked) {
+        this.doubleScoreSelected = false;  // Deseleccionamos el otro checkbox
+      }
+    }
+
+    // Si al menos uno está seleccionado, habilitamos el botón de cierre
+    this.canDismiss = this.doubleScoreSelected || this.ayuditaSelected;
   }
+
+
+
 }
