@@ -210,15 +210,15 @@ restart() {
       this.correct_answers_row++;
 
       if (this.progress <= 0.2) {
-        this.score = 2 * this.double_points + this.score;
+        this.score = 10 * this.double_points + this.score;
       } else if (this.progress <= 0.40) {
-        this.score = 4 * this.double_points + this.score;
+        this.score = 8 * this.double_points + this.score;
       } else if (this.progress <= 0.60) {
         this.score = 6 * this.double_points + this.score;
       } else if (this.progress <= 0.80) {
-        this.score = 8 * this.double_points + this.score;
+        this.score = 4 * this.double_points + this.score;
       } else if (this.progress <= 1) {
-        this.score = 10*this.double_points + this.score;
+        this.score = 2*this.double_points + this.score;
       }
    
       this.isDisabled = true; // Desactiva los botones
@@ -235,24 +235,23 @@ restart() {
   selectPower(input_power:string){
     if (input_power  == 'doubleScore') {
       this.double_points = 2
+      console.log("doble puntuacion activada")
     }
-    console.log("poder activo papuuu")
-   this.counter_double_points = setInterval(() => {
-    clearInterval(this.counter_double_points)
-    this.double_points = 1
-    this.pista = false
-    console.log('poder inactivo')
-  
-  }, 15000);
-
-  
-  
-
 
     if (input_power == 'pista'){
+      console.log('pista activada')
       this.pista = true
       
     }
+
+
+    this.counter_double_points = setInterval(() => {
+      clearInterval(this.counter_double_points)
+      this.double_points = 1
+      this.pista = false
+      console.log('poder inactivo')
+    
+    }, 15000);
   }
 
   // Muestra el nombre del usuario desde la API
