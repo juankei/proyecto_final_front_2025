@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { CheckboxCustomEvent } from '@ionic/angular/standalone';
 import { IonModal } from '@ionic/angular';
+import { power } from 'ionicons/icons';
 
 @Component({
   selector: 'app-preguntas',
@@ -30,6 +31,8 @@ export class PreguntasPage implements OnInit {
  
 
   // Variables de control
+  public isIntervalRunning: boolean = false; // Para saber si el intervalo está activo
+
   public progress = 0; // Progreso de la barra de carga
   public counter: any; // Contador para la barra de carga
   public questionNumber = 1; // Número de la pregunta actual
@@ -51,6 +54,7 @@ export class PreguntasPage implements OnInit {
 
   public double_points: number = 1 // Para doble puntuación
   public counter_double_points : any
+  public pista : boolean = false
 
   // Constructor con inyección de dependencias
   constructor(
@@ -80,41 +84,43 @@ export class PreguntasPage implements OnInit {
     this.Questions(); // Inicia el manejo del progreso
   }
 
-  // Maneja el progreso del juego y el cambio de preguntas
   Questions() {
+    if (this.isIntervalRunning) return // Si el intervalo ya está en ejecución, no lo reinicias.
+  
+    this.isIntervalRunning = true; // Marca el intervalo como en ejecución
+  
     this.counter = setInterval(() => {
       this.progress += 0.01; // Incrementa el progreso
-
+  
       // Cuando el progreso llega al 100%, pasa a la siguiente pregunta
       if (this.progress >= 1) {
         this.questionNumber++; // Incrementa el número de la pregunta
         setTimeout(() => {
           this.progress = 0; // Reinicia el progreso
           this.nextquestion(); // Carga la siguiente pregunta
-
+  
           // Resetea los colores y desbloquea los botones
           this.color_correct = '';
           this.color_incorrect = '';
           this.isDisabled = false;
         });
       }
-
+  
       // Si se logran 5 respuestas correctas consecutivas
       if (this.correct_answers_row == 5) {
-
+        this.pause(); // Pausa el juego
+        this.isButtonVisible = false; // Muestra el botón especial
         this.addScore(); // Guarda el puntaje
-       this.openModal() 
-
+        this.openModal();
+  
         // Reinicia el juego después de 1 segundo
         setTimeout(() => {
-          this.selectPower
-          this.closeModal();
-          this.correct_answers_row = 6; // Reinicia el contador de respuestas correctas
-          ; // Activa el modo de puntaje doble
+          
+          this.correct_answers_row = 0; // Reinicia el contador de respuestas correctas
+          this.double_points = 2; // Activa el modo de puntaje doble
         }, 1000);
       }
-
-      
+  
     }, 50); // Intervalo de 50ms
   }
 
@@ -145,6 +151,7 @@ export class PreguntasPage implements OnInit {
       console.log(response);
       if (response && response.length > 0) {
         const question = response[0];  
+        if (this.pista == false){
         this.answers_data = this.shuffleArray([
           question.opcion_1,
           question.respuesta_correcta,
@@ -152,19 +159,33 @@ export class PreguntasPage implements OnInit {
           question.opcion_3,
         ]);
       }
+
+      if (this.pista == true){
+        this.answers_data = this.shuffleArray([
+          question.opcion_1,
+          question.respuesta_correcta,
+          
+        ]);
+      }
+      }
     });
   }
 
   // Pausa el contador
   pause() {
+  if (this.isIntervalRunning) {
     clearInterval(this.counter);
+    this.isIntervalRunning = false; // Marca el intervalo como detenido
   }
+}
 
-  // Reinicia el contador y pasa a la siguiente pregunta
-  restart() {
-    this.Questions();
+// Reiniciar el contador y pasar a la siguiente pregunta
+restart() {
+  if (!this.isIntervalRunning) {
+    this.Questions(); // Llama a la función de progreso solo si no hay intervalo en ejecución
     this.questionNumber++;
   }
+}
 
   // Cierra el modal
   closeModal() {
@@ -173,8 +194,11 @@ export class PreguntasPage implements OnInit {
   }
 
   openModal() {
-    this.pause(); // Pausa el juego
-    this.modal.present();
+    
+      this.pause(); // Pausa el juego antes de abrir el modal
+      this.modal.present(); // Luego presenta el modal
+    
+   
 
   }
 
@@ -206,6 +230,8 @@ export class PreguntasPage implements OnInit {
     }
   }
 
+
+  selectedPower: string = ''; // Variable para almacenar la opción seleccionada
   selectPower(input_power:string){
     if (input_power  == 'doubleScore') {
       this.double_points = 2
@@ -214,14 +240,18 @@ export class PreguntasPage implements OnInit {
    this.counter_double_points = setInterval(() => {
     clearInterval(this.counter_double_points)
     this.double_points = 1
+    this.pista = false
     console.log('poder inactivo')
   
   }, 15000);
 
   
   
-  if (input_power == 'Ayudita'){
 
+
+    if (input_power == 'pista'){
+      this.pista = true
+      
     }
   }
 
@@ -245,33 +275,11 @@ export class PreguntasPage implements OnInit {
   }
 
   // Propiedades relacionadas con el modal
-  canDismiss = false; // control general para el modal
+  canDismiss = false;
   presentingElement!: HTMLElement | null;
-  
-  doubleScoreSelected = false;
-  ayuditaSelected = false;
 
-  // Cambia el estado del modal al aceptar los términos
-  onTermsChanged(power: string, event: any) {
-    const isChecked = event.detail.checked;
-
-    // Si seleccionas uno, desmarcamos el otro
-    if (power === 'doubleScore') {
-      this.doubleScoreSelected = isChecked;
-      if (isChecked) {
-        this.ayuditaSelected = false;  // Deseleccionamos el otro checkbox
-      }
-    } else if (power === 'ayudita') {
-      this.ayuditaSelected = isChecked;
-      if (isChecked) {
-        this.doubleScoreSelected = false;  // Deseleccionamos el otro checkbox
-      }
-    }
-
-    // Si al menos uno está seleccionado, habilitamos el botón de cierre
-    this.canDismiss = this.doubleScoreSelected || this.ayuditaSelected;
+  onTermsChanged(event: any, power: string) {
+    console.log(`Power seleccionado: ${power}`);
+    this.closeModal(); // Cierra el modal inmediatamente cuando se selecciona una opción
   }
-
-
-
 }
