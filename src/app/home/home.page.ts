@@ -65,6 +65,7 @@ export class HomePage implements OnInit {
   // Función para enviar el username al backend
   addUsername() {
     const user = {
+      id: this.auth_user.email,
       username: this.username
     };
 
@@ -77,12 +78,16 @@ export class HomePage implements OnInit {
 
   // Función para navegar a la página de preguntas
   navigateToQuestion1() {
+    let data = { nombre: this.auth_user.name, picture: this.auth_user.picture, email: this.auth_user.email}; // Datos que queremos enviar
+    console.log (data)
     // Navega a la página '/question1'
-    this.router.navigate(['/preguntas'])
+    this.router.navigate(['/preguntas', data])
+    }
   }
 
 
 
 
 
-}
+
+  

@@ -17,9 +17,7 @@ export class LoginPage implements OnInit {
 
   login() {
 
-  
-
-    this.auth.loginWithRedirect({
+  this.auth.loginWithRedirect({
       appState: {
         target: '/home'
       }

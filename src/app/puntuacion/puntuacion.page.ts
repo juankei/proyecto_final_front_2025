@@ -26,15 +26,8 @@ export class PuntuacionPage implements OnInit {
   public input_score : any
   public score_data : any = []
    
-  showscore (){
-    // Limpia cualquier intervalo previo que pueda estar activo
-    this.pause(); 
-  
  
-    setTimeout(() => {
-      this.router.navigate(['/preguntas']); 
-    }, 1000); 
-  }
+  
 
   score (){
     this.http.get(`${this.url}/score/`).subscribe((response) => {
@@ -52,7 +45,7 @@ export class PuntuacionPage implements OnInit {
   }
 
   ngOnInit() {
-    this.showscore()
+
     this.score ()
   }
 

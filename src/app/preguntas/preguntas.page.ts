@@ -6,9 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { CheckboxCustomEvent } from '@ionic/angular/standalone';
 import { IonModal } from '@ionic/angular';
-import { power } from 'ionicons/icons';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-preguntas',
@@ -23,6 +23,9 @@ export class PreguntasPage implements OnInit {
   // URL de la API
   public url: string = 'http://localhost:3000';
 
+  // user-login
+  public user_login: any;
+  public username: any
   // Variables de datos
   public input_data: any; // Datos de las preguntas
   public input_user: any; // Información del usuario
@@ -59,6 +62,8 @@ export class PreguntasPage implements OnInit {
   // Constructor con inyección de dependencias
   constructor(
     private navController: NavController,
+  
+    private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
     private modalController: ModalController
@@ -70,7 +75,13 @@ export class PreguntasPage implements OnInit {
     this.showusername(); // Muestra el nombre del usuario
     this.randomQuestions(); // Carga las respuestas aleatorias
     this.score = 0; // Reinicia el puntaje
+    this.user_login = this.route.snapshot.params
+    this.username = this.user_login.email
+    console.log (this.user_login)
+
   }
+
+ 
 
   // Carga la primera pregunta desde la API
   firstQuestion() {
@@ -110,18 +121,18 @@ export class PreguntasPage implements OnInit {
       if (this.correct_answers_row == 5) {
         this.pause(); // Pausa el juego
         this.isButtonVisible = false; // Muestra el botón especial
-        this.addScore(); // Guarda el puntaje
+       
         this.openModal();
   
         // Reinicia el juego después de 1 segundo
         setTimeout(() => {
           
           this.correct_answers_row = 0; // Reinicia el contador de respuestas correctas
-          this.double_points = 2; // Activa el modo de puntaje doble
+         
         }, 1000);
       }
   
-    }, 50); // Intervalo de 50ms
+    }, 40); // Intervalo de 50ms
   }
 
   // Carga la siguiente pregunta desde la API
@@ -211,14 +222,19 @@ restart() {
 
       if (this.progress <= 0.2) {
         this.score = 10 * this.double_points + this.score;
+        this.addScore(); // Guarda el puntaje
       } else if (this.progress <= 0.40) {
         this.score = 8 * this.double_points + this.score;
+        this.addScore(); // Guarda el puntaje
       } else if (this.progress <= 0.60) {
         this.score = 6 * this.double_points + this.score;
+        this.addScore(); // Guarda el puntaje
       } else if (this.progress <= 0.80) {
         this.score = 4 * this.double_points + this.score;
+        this.addScore(); // Guarda el puntaje
       } else if (this.progress <= 1) {
         this.score = 2*this.double_points + this.score;
+        this.addScore(); // Guarda el puntaje
       }
    
       this.isDisabled = true; // Desactiva los botones
@@ -256,7 +272,14 @@ restart() {
 
   // Muestra el nombre del usuario desde la API
   showusername() {
-    this.http.get(`${this.url}/showusername/`).subscribe((response) => {
+    if (!this.user_login || !this.username) {
+      console.error('Error: user_login.email no está definido');
+      return;
+    }
+  
+    console.log('Email que se está pasando:', this.user_login);
+  
+    this.http.get(`${this.url}/showusername/${this.username}`).subscribe((response) => {
       console.log(response);
       this.input_user = response;
       if (this.input_user && this.input_user.length > 0) {
@@ -266,11 +289,15 @@ restart() {
   }
 
   // Envía el puntaje actual a la API
+
   addScore() {
-    let score = { score: this.score };
+ 
+    let score = { score: this.score, id : this.user_login.email };
+   
     this.http.post(`${this.url}/addScore`, score).subscribe((response) => {
       console.log(response);
     });
+    console.log('puntuacion alamacenada')
   }
 
   // Propiedades relacionadas con el modal
@@ -281,4 +308,6 @@ restart() {
     console.log(`Power seleccionado: ${power}`);
     this.closeModal(); // Cierra el modal inmediatamente cuando se selecciona una opción
   }
+
+
 }
