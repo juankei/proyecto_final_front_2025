@@ -2,7 +2,7 @@
   <!-- Contenedor principal para mostrar los scores -->
   <div class="header-info">
     <div class="username">
-      <ion-label>{{ user_data.username }}</ion-label>
+      <ion-label>{{ user_data[0]?.username }}</ion-label>
     </div>
     <div class="score">
       <ion-label>{{ score }}</ion-label>
@@ -44,40 +44,71 @@
   <!-- Botón para abrir el modal -->
  
 
-  <ion-modal  [presentingElement]="presentingElement">
-    <ng-template>
-      <ion-header>
-        <ion-toolbar>
-          <ion-title>Modal</ion-title>
-          <ion-buttons slot="end">
-            <ion-button (click)="closeModal()">Close</ion-button>
-          </ion-buttons>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <p class="ion-padding-horizontal">Poder.</p>
-  
+ <ion-modal [presentingElement]="presentingElement">
+  <ng-template>
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Selecciona un Poder</ion-title>
+        <ion-buttons slot="end">
+          <ion-button color="danger" (click)="closeModal()">Cerrar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content class="ion-padding" color="light">
+      <div class="modal-content">
+        <p class="ion-padding-horizontal">
+          Selecciona el poder que deseas usar:
+        </p>
+
         <!-- Ion Radio Group para seleccionar solo una opción -->
-        <ion-item>
+        <ion-item lines="none" class="ion-no-margin">
           <ion-radio-group [(ngModel)]="selectedPower">
             <ion-radio
               value="doble"
               (ionChange)="onTermsChanged($event, 'doble')"
-              (click)="selectPower('doubleScore')">
-              <ion-label>Doble puntuación</ion-label>
+              (click)="selectPower('doubleScore')"
+            >
+              <ion-label class="custom-label">Doble puntuación</ion-label>
             </ion-radio>
-  
+
             <ion-radio
               value="pista"
               (ionChange)="onTermsChanged($event, 'pista')"
-              (click)="selectPower('pista')">
-              <ion-label>Pista</ion-label>
+              (click)="selectPower('pista')"
+            >
+              <ion-label class="custom-label">Pista</ion-label>
+            </ion-radio>
+
+            <!-- Nuevo poder: Quitar puntos a un usuario conectado -->
+            <ion-radio
+              value="quitarPuntos"
+              (ionChange)="onTermsChanged($event, 'quitarPuntos')"
+              (click)="selectPower('removePoints')"
+            >
+              <ion-label class="custom-label">Quitar puntos a un usuario</ion-label>
             </ion-radio>
           </ion-radio-group>
         </ion-item>
-      </ion-content>
-    </ng-template>
-  </ion-modal>
+
+        <!-- Lista de usuarios conectados (solo visible si se elige "quitar puntos") -->
+        <div *ngIf="selectedPower === 'quitarPuntos'">
+          <p class="ion-padding-horizontal">Selecciona un usuario:</p>
+          <ion-list class="user-list">
+            <ion-item *ngFor="let user of connectedUsers"  class="user-item">
+              <ion-label>
+                
+                <ion-button >ID: {{ user?.usuario_id }} | Puntos: {{ user?.puntos }}</ion-button>
+              </ion-label>
+             
+            </ion-item>
+          </ion-list>
+        </div>
+      </div>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+
   
   
 </ion-content>

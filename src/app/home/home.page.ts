@@ -83,6 +83,8 @@ export class HomePage implements OnInit {
     // Navega a la página '/question1'
     this.router.navigate(['/preguntas', data])
     }
+
+    
   }
 
 

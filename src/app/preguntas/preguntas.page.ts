@@ -9,7 +9,6 @@ import { ModalController } from '@ionic/angular';
 import { IonModal } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 
-
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.page.html',
@@ -22,7 +21,9 @@ export class PreguntasPage implements OnInit {
 
   // URL de la API
   public url: string = 'http://localhost:3000';
+ public connectedUsers: any[] = []; // Lista de usuarios conectados
 
+ 
   // user-login
   public user_login: any;
   public username: any
@@ -66,22 +67,35 @@ export class PreguntasPage implements OnInit {
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private modalController: ModalController
+    private modalController: ModalController,
+    
   ) {}
 
   // Inicializa el componente y obtiene los datos iniciales
   ngOnInit() {
+   this.userConect()
+    this.user_login = this.route.snapshot.params
+    this.username = this.user_login.email
+    console.log (this.username)
+
     this.firstQuestion(); // Carga la primera pregunta
     this.showusername(); // Muestra el nombre del usuario
     this.randomQuestions(); // Carga las respuestas aleatorias
     this.score = 0; // Reinicia el puntaje
-    this.user_login = this.route.snapshot.params
-    this.username = this.user_login.email
-    console.log (this.user_login)
-
+    
+  
   }
 
- 
+  userConect() {
+    this.http.get(`${this.url}/allUsers`).subscribe((response) => {
+      console.log(response);
+      this.input_data = response;
+      if (this.input_data && this.input_data.length > 0) {
+        this.connectedUsers = this.input_data;
+      }
+    });
+    
+  }
 
   // Carga la primera pregunta desde la API
   firstQuestion() {
@@ -187,6 +201,7 @@ export class PreguntasPage implements OnInit {
   if (this.isIntervalRunning) {
     clearInterval(this.counter);
     this.isIntervalRunning = false; // Marca el intervalo como detenido
+    
   }
 }
 
@@ -260,6 +275,8 @@ restart() {
       
     }
 
+    
+
 
     this.counter_double_points = setInterval(() => {
       clearInterval(this.counter_double_points)
@@ -272,7 +289,7 @@ restart() {
 
   // Muestra el nombre del usuario desde la API
   showusername() {
-    if (!this.user_login || !this.username) {
+    if (!this.user_login) {
       console.error('Error: user_login.email no está definido');
       return;
     }
@@ -284,6 +301,7 @@ restart() {
       this.input_user = response;
       if (this.input_user && this.input_user.length > 0) {
         this.user_data = this.input_user;
+        console.log(this.user_data[0].username)
       }
     });
   }
@@ -299,6 +317,8 @@ restart() {
     });
     console.log('puntuacion alamacenada')
   }
+
+
 
   // Propiedades relacionadas con el modal
   canDismiss = false;

@@ -149,42 +149,127 @@ ion-content {
   margin-top: 30px;
 }
 
-.open-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+
+/* Estilos personalizados para el modal */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
-/* Animaciones */
-@keyframes fadeInUp {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Estilos personalizados para el modal futbolero */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
-@keyframes slideIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-30px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Estilos sencillos y modernos */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
-/* Animación de texto de las preguntas */
-@keyframes slideInText {
-  0% {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+ion-toolbar {
+  --background: #387ef5; /* Color azul claro */
+  --color: white;
+  font-weight: bold;
+}
+
+ion-title.title {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+ion-button {
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: #8c8c8c; /* Gris claro */
+  color: white;
+}
+
+ion-button[color="medium"]:hover {
+  background-color: #7a7a7a; /* Gris más oscuro al pasar el cursor */
+}
+
+.description-text {
+  font-size: 1.1rem;
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+ion-radio-group {
+  display: flex;
+  flex-direction: column;
+}
+
+ion-radio {
+  --padding-start: 10px;
+}
+
+ion-item {
+  margin-top: 10px;
+  --background: transparent;
+}
+
+ion-radio-label {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+ion-radio[checked] {
+  --background: #387ef5; /* Azul de fondo cuando está seleccionado */
+  --border-color: #387ef5; 
+}
+
+ion-radio[checked] ion-label {
+  color: white;
+}
+
+ion-item ion-radio {
+  border-radius: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.user-list {
+  max-height: 300px; /* Limita el tamaño para evitar que se salga de la pantalla */
+  overflow-y: auto; /* Permite hacer scroll si hay muchos usuarios */
+  background: #f4f4f4; /* Fondo gris claro */
+  border-radius: 10px; /* Bordes redondeados */
+  padding: 10px;
+}
+
+
+.user-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* Espaciado entre elementos */
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+}
+
+.user-item h3 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+  color: #333; /* Texto oscuro */
+}
+
+.user-item p {
+  font-size: 14px;
+  margin: 0;
+  color: #666; /* Texto gris */
 }

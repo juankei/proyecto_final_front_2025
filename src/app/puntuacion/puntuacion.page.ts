@@ -1,11 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
-import { IonicModule } from '@ionic/angular';
 import { Router } from '@angular/router';
-
+import { ModalController } from '@ionic/angular';
+import { IonModal } from '@ionic/angular';
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -17,7 +19,14 @@ import { Router } from '@angular/router';
 })
 export class PuntuacionPage implements OnInit {
 
-  constructor(private navController: NavController, private http: HttpClient,private router: Router) { }
+  constructor(
+    private navController: NavController,
+  
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private modalController: ModalController
+  ) {}
 
   
   counter : number = 0
@@ -25,8 +34,13 @@ export class PuntuacionPage implements OnInit {
   public url: string = 'http://localhost:3000'
   public input_score : any
   public score_data : any = []
-   
+  public user_login: any;
+  ngOnInit() {
  
+ this.user_login = this.route.snapshot.params
+ console.log(this.user_login)
+ this.score ()
+  }
   
 
   score (){
@@ -40,13 +54,7 @@ export class PuntuacionPage implements OnInit {
   }
 
 
-  pause (){
-    clearInterval(this.interval)
-  }
-
-  ngOnInit() {
-
-    this.score ()
-  }
+ 
+ 
 
 }
