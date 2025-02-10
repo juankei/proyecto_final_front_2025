@@ -73,10 +73,15 @@ export class PreguntasPage implements OnInit {
 
   // Inicializa el componente y obtiene los datos iniciales
   ngOnInit() {
-   this.userConect()
+    
+   
+  
     this.user_login = this.route.snapshot.params
     this.username = this.user_login.email
     console.log (this.username)
+
+    this.showScore()
+   this.userConect()
 
     this.firstQuestion(); // Carga la primera pregunta
     this.showusername(); // Muestra el nombre del usuario
@@ -275,6 +280,13 @@ restart() {
       
     }
 
+
+    if (input_power == 'removePoints'){
+      console.log('quitar puntos')
+      this.score = 0
+      
+    }
+
     
 
 
@@ -306,7 +318,16 @@ restart() {
     });
   }
 
-  // Envía el puntaje actual a la API
+  substractPoints(input_userPoint: string){
+    console.log(input_userPoint)
+     
+    let substract_score = {  id : input_userPoint };
+   
+    this.http.post(`${this.url}/substractPoints`, substract_score).subscribe((response) => {
+      console.log(response);
+    });
+    console.log('puntuacion eliminada')
+  }
 
   addScore() {
  
@@ -318,6 +339,28 @@ restart() {
     console.log('puntuacion alamacenada')
   }
 
+  public input_score : any
+  public show_score : any = []
+  public score_show : number = 0
+
+  showScore (){
+    if (!this.user_login) {
+      console.error('Error: user_login.email no está definido');
+      return;
+    }
+  
+    console.log('los puntos que estan pasando :', this.user_login);
+  
+    this.http.get(`${this.url}/Score/${this.user_login.email}`).subscribe((response) => {
+      console.log(response); 
+      this.input_score = response; 
+      if (this.input_score && this.input_score.length > 0) {
+        this.show_score = this.input_score; 
+        console.log(this.show_score[0].puntos)
+        this.score_show = this.show_score[0].puntos
+        
+      }});
+  }
 
 
   // Propiedades relacionadas con el modal

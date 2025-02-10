@@ -4,7 +4,7 @@
     <div class="username">
       <ion-label>{{ user_data[0]?.username }}</ion-label>
     </div>
-    <div class="score">
+    <div class="score" >
       <ion-label>{{ score }}</ion-label>
     </div>
   </div>
@@ -98,7 +98,7 @@
             <ion-item *ngFor="let user of connectedUsers"  class="user-item">
               <ion-label>
                 
-                <ion-button >ID: {{ user?.usuario_id }} | Puntos: {{ user?.puntos }}</ion-button>
+                <ion-button (click)="substractPoints(user.usuario_id)">ID: {{ user?.usuario_id }} | Puntos: {{ user?.puntos }}</ion-button>
               </ion-label>
              
             </ion-item>
