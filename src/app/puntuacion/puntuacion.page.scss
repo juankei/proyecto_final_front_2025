@@ -1,81 +1,52 @@
-/* Estilo para el ion-content */
 ion-content {
-    --background: linear-gradient(180deg, #f9f9f9, #e0f7fa); /* Fondo con toque vibrante */
+    --background: linear-gradient(180deg, #a5d6a7, #81c784); /* Fondo verde suave, estilo césped de campo */
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 20px;
-    color: #333; /* Texto oscuro para buena legibilidad */
-    font-family: 'Poppins', Arial, sans-serif; /* Fuente moderna */
+    color: #333;
+    font-family: 'Open Sans', Arial, sans-serif; /* Fuente más legible y moderna */
+    height: 100vh;
+    justify-content: flex-start;
     position: relative;
-    height: 100vh; /* Asegura que ion-content ocupe todo el alto de la pantalla */
-    justify-content: center; /* Centra el contenido verticalmente */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra sutil para separar contenido */
-    border-radius: 15px; /* Bordes redondeados */
+    animation: fadeIn 0.5s ease-out;
+  }
+
+/* El contenedor de los puntajes, ajustado para que no ocupe toda la pantalla */
+.score-item {
+  background-color: rgba(255, 255, 255, 0.9);  /* Fondo blanco semitransparente */
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;  /* No ocupa toda la pantalla */
+  max-width: 500px;  /* Máximo tamaño para el div */
+  transition: transform 0.3s ease-in-out;
+  text-align: center;  /* Asegura que el texto dentro del div esté centrado */
+  position: absolute; /* Para poder controlar el posicionamiento de manera absoluta */
+  top: 10%; /* Posicionamos el contenedor a la mitad de la pantalla */
+  left: 10%; /* Posicionamos el contenedor a la mitad de la pantalla */
+}
+/* Hover para darle un toque interactivo */
+.score-item:hover {
+  transform: scale(1.05);
 }
 
-/* Estilo para la lista de puntuaciones */
-.score-list {
-    width: 100%; /* Asegura que ocupe todo el ancho disponible */
-    padding: 0; /* Eliminar padding extra */
-    margin: 0; /* Eliminar márgenes por defecto */
-    background-color: #f4f4f4; /* Fondo claro para el ion-list */
-    border-radius: 15px; /* Bordes redondeados */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-}
-
-/* Ajustes para ion-item */
-ion-item {
-    background: transparent !important; /* Asegura que no haya fondo oscuro */
-    --inner-background: transparent !important; /* Forzamos que el fondo interno sea transparente */
-    --highlight-background: transparent !important; /* El fondo de resaltado también es transparente */
-    padding: 10px; /* Relleno adicional para cada item */
-    border-radius: 10px; /* Bordes redondeados */
-    margin-bottom: 15px; /* Espacio entre los elementos */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
-}
-
-/* Nombre de usuario */
+/* Estilo del nombre de usuario */
 .username-label {
-    color: #333; /* Color oscuro para el nombre de usuario (o ajusta según preferencia) */
-    text-align: left;
-    font-weight: 600; /* Más negrita para el nombre */
-    font-size: 1.3rem;
-    margin-right: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #4f4f4f;
+  margin: 0;
 }
 
-/* Puntaje */
+/* Estilo de la puntuación */
 .score-label {
-    color: #ffeb3b; /* Dorado para los puntos */
-    font-weight: 700; /* Negrita para destacar el puntaje */
-    text-align: right;
-    font-size: 1.3rem;
+  font-size: 20px;
+  font-weight: bold;
+  color: #ff6f61;  /* Un color cálido para la puntuación */
+  margin: 0;
 }
-
-/* Efecto hover sobre el item de puntuación */
-ion-item:hover {
-    background: #e0f7fa; /* Fondo más claro al pasar el ratón */
-    box-shadow: 0 6px 10px rgba(184, 174, 34, 0.15); /* Aumenta la sombra */
-    cursor: pointer; /* Cambia el cursor para indicar interacción */
-}
-
-/* Añadir separación visual entre cada item de puntuación */
-ion-item::after {
-    content: "";
-    display: block;
-    height: 2px;
-    background-color: #dcdcdc;
-    margin-top: 10px;
-    opacity: 0.2;
-}
-
-/* Si quieres cambiar el color del label en general */
-ion-label {
-    background: transparent !important; /* Asegura que el label no tenga fondo */
-    color: #666; /* Color de texto para el label si no es puntaje o usuario */
-}
-
-
