@@ -1,26 +1,31 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
 import { ModalController } from '@ionic/angular';
-import { IonModal } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import { IonContent, IonHeader, IonToolbar, IonTitle,
+  IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
+   IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonButtons,IonModal,IonRadio,IonItem,IonProgressBar } from '@ionic/angular/standalone';
+
 
 @Component({
   selector: 'app-preguntas',
   templateUrl: './preguntas.page.html',
   styleUrls: ['./preguntas.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, IonicModule],
+  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonTitle,
+    IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
+     IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonModal,IonButtons,IonRadio,IonItem,IonProgressBar],
 })
 export class PreguntasPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
 
   // URL de la API
-  public url: string = 'http://localhost:3000';
+ // public url: string = 'http://localhost:3000';
+  public url: string = 'https://proyecto-final-back-2025.onrender.com';
  public connectedUsers: any[] = []; // Lista de usuarios conectados
 
  
