@@ -46,7 +46,7 @@ export class HomePage implements OnInit {
     this.http.get(`${this.url}/user/${this.auth_user.email}`).subscribe((response) => {
       console.log(response);
       this.db_user = response;
-      if(response = 'usuario no encontrado'){
+      if(response == 'usuario no encontrado'){
         this.createUser();
       
       }
@@ -61,7 +61,7 @@ export class HomePage implements OnInit {
       nombre_usuario: this.auth_user.name
     };
     
-    this.http.post('${this.url}/adduser', users).subscribe((response) => {
+    this.http.post(`${this.url}/adduser`, users).subscribe((response) => {
       console.log(response);
     });
   }
