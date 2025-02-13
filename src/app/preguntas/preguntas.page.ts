@@ -9,7 +9,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ModalController } from '@ionic/angular';
 import { IonContent, IonHeader, IonToolbar, IonTitle,
   IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
-   IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonButtons,IonModal,IonRadio,IonItem,IonProgressBar } from '@ionic/angular/standalone';
+   IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonButtons,IonModal,IonRadio,IonItem,IonProgressBar,IonRadioGroup } from '@ionic/angular/standalone';
 
 
 @Component({
@@ -19,14 +19,14 @@ import { IonContent, IonHeader, IonToolbar, IonTitle,
   standalone: true,
   imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonTitle,
     IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
-     IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonModal,IonButtons,IonRadio,IonItem,IonProgressBar],
+     IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonModal,IonButtons,IonRadio,IonItem,IonProgressBar,IonRadioGroup],
 })
 export class PreguntasPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
 
   // URL de la API
-  public url: string = 'http://localhost:3000';
-  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  //public url: string = 'http://localhost:3000';
+  public url: string = 'https://proyecto-final-back-2025.onrender.com';
  public connectedUsers: any[] = []; // Lista de usuarios conectados
 
  
