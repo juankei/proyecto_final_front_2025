@@ -24,8 +24,8 @@ export class HomePage implements OnInit {
 
   public user_name: any
   // URL del backend donde se enviará la información
-  //public url: string = 'http://localhost:3000';
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000';
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
 
   // Variable para almacenar el nombre de usuario
   public username: string = '';

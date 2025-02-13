@@ -4,8 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
 import { Router } from '@angular/router';
-import { ModalController } from '@ionic/angular';
+
 import { ActivatedRoute } from '@angular/router';
+import { ModalController } from '@ionic/angular';
 import { IonContent, IonHeader, IonToolbar, IonTitle,
   IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
    IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonButtons,IonModal,IonRadio,IonItem,IonProgressBar } from '@ionic/angular/standalone';
@@ -24,8 +25,8 @@ export class PreguntasPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
 
   // URL de la API
- // public url: string = 'http://localhost:3000';
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000';
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
  public connectedUsers: any[] = []; // Lista de usuarios conectados
 
  
@@ -68,11 +69,10 @@ export class PreguntasPage implements OnInit {
   // Constructor con inyección de dependencias
   constructor(
     private navController: NavController,
-  
     private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private modalController: ModalController,
+    private modalController: ModalController
     
   ) {}
 

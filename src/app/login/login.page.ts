@@ -11,7 +11,7 @@ import { IonContent, IonHeader, IonToolbar, IonTitle,
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule,IonContent, IonHeader, IonToolbar, IonTitle,
+  imports: [CommonModule,FormsModule,IonContent, IonHeader, IonToolbar, IonTitle,
     IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
      IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonModal,IonButtons,IonRadio,IonItem]
 })
