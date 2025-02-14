@@ -98,7 +98,7 @@
             <ion-item *ngFor="let user of connectedUsers"  class="user-item">
               <ion-label>
                 
-                <ion-button (click)="substractPoints(user.usuario_id)">ID: {{ user?.usuario_id }} | Puntos: {{ user?.puntos }}</ion-button>
+                <ion-button (click)="substractPoints(user.id)">ID: {{ user?.id }} | Puntos: {{ user?.puntos }}</ion-button>
               </ion-label>
              
             </ion-item>

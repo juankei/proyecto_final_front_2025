@@ -25,8 +25,8 @@ export class PreguntasPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
 
   // URL de la API
-  //public url: string = 'http://localhost:3000';
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000';
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
  public connectedUsers: any[] = []; // Lista de usuarios conectados
 
  
@@ -84,6 +84,7 @@ export class PreguntasPage implements OnInit {
     this.user_login = this.route.snapshot.params
     this.username = this.user_login.email
     console.log (this.username)
+  
 
     
    
@@ -155,6 +156,15 @@ export class PreguntasPage implements OnInit {
          
         }, 1000);
       }
+      if (this.questionNumber == 16){
+        let juankei = {
+          email : this.username
+        }
+        this.pause()
+        this.router.navigate(['/poderes',juankei]);
+      }
+      
+     
   
     }, 40); // Intervalo de 50ms
   }
@@ -331,6 +341,7 @@ restart() {
     console.log(input_userPoint);
   
     let substract_score = { id: input_userPoint , id_origen:this.user_login.email  };
+    console.log(substract_score)
   
     this.http.post(`${this.url}/substractPoints`, substract_score).subscribe(
       (response: any) => {
@@ -345,7 +356,9 @@ restart() {
         }
         // Puedes pasar los datos a tu UI o actualizar el estado en tu componente
          // Mostrar los datos actualizados
+         
       },
+      
       (error) => {
         console.error('Error al restar los puntos:', error);
       }

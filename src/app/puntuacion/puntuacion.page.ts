@@ -15,7 +15,7 @@ import { IonContent, IonHeader, IonToolbar, IonTitle,
   templateUrl: './puntuacion.page.html',
   styleUrls: ['./puntuacion.page.scss'],
   standalone: true,
-  imports: [ CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonTitle,
+  imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonTitle,
     IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
      IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonModal,IonButtons,IonRadio,IonItem]
 })
@@ -33,8 +33,8 @@ export class PuntuacionPage implements OnInit {
   
   counter : number = 0
   interval : any
-  //public url: string = 'http://localhost:3000'
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000'
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
   
   public input_score : any
   public score_data : any = []
