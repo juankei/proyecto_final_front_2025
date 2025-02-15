@@ -1,11 +1,13 @@
 <ion-content [fullscreen]="true">
-  <div class="content-wrapper">
+  <div class="content-wrapper" >
     <!-- Mensaje de poder -->
     
-      <h1 class="power-title">¡Has conseguido 5 preguntas en racha!</h1>
-      <h2 class="power-subtitle">¡Has conseguido el poder de doble puntuación!</h2>
+      <h1 class="power-title"> Tu puntuacion a sido {{puntos}} </h1>
+      <h2  *ngFor="let option of score_users"class="power-subtitle">{{option.usuario_origen}} es un cabron y te quito 10 puntos </h2>
    
 
     <!-- Aquí iría el resto del contenido del quiz o más secciones -->
   </div>
+
+  <ion-button (click)="returnHome()">Volver a Jugar</ion-button>
 </ion-content>

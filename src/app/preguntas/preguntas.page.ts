@@ -65,6 +65,7 @@ export class PreguntasPage implements OnInit {
   public double_points: number = 1 // Para doble puntuación
   public counter_double_points : any
   public pista : boolean = false
+  public disabled_power : boolean = false
 
   // Constructor con inyección de dependencias
   constructor(
@@ -158,15 +159,17 @@ export class PreguntasPage implements OnInit {
       }
       if (this.questionNumber == 16){
         let juankei = {
-          email : this.username
+          email : this.user_login.email,
+          score : this.score
         }
+        console.log(juankei)
         this.pause()
         this.router.navigate(['/poderes',juankei]);
       }
       
      
   
-    }, 40); // Intervalo de 50ms
+    }, 30); // Intervalo de 50ms
   }
 
   // Carga la siguiente pregunta desde la API
@@ -296,8 +299,9 @@ restart() {
     }
 
     if (input_power == 'removePoints'){
-      console.log('pista activada')
-     this.userConect()
+      console.log('remove acitive ')
+      this.userConect()
+      
       
     }
 
@@ -347,6 +351,7 @@ restart() {
       (response: any) => {
         // La respuesta contiene los datos actualizados
         console.log(response);
+        this.disabled_power = true
   
         // Acceder a los datos del usuario actualizado
         if (input_userPoint){
@@ -362,6 +367,8 @@ restart() {
       (error) => {
         console.error('Error al restar los puntos:', error);
       }
+
+      
     );
   }
 
