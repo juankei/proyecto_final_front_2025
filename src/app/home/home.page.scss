@@ -1,5 +1,5 @@
 ion-content {
-  --background: linear-gradient(180deg, #f9f9f9, #e0f7fa);
+  --background: linear-gradient(180deg, #a5d6a7, #81c784); /* Fondo verde suave, estilo césped de campo */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -15,8 +15,8 @@ ion-content {
   align-items: center;
   text-align: center;
   width: 100%;
-  max-width: 500px; /* Ajuste para limitar el tamaño máximo */
-  padding: 20px;
+  max-width: 800px; /* Ajuste para limitar el tamaño máximo */
+  padding: 80px;
   position: absolute; /* Para poder controlar el posicionamiento de manera absoluta */
   top: 40%; /* Posicionamos el contenedor a la mitad de la pantalla */
   left: 50%; /* Posicionamos el contenedor a la mitad de la pantalla */
@@ -26,12 +26,36 @@ ion-content {
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1); /* Sombra suave para el contenedor */
 }
 
-h1 {
-  font-size: 2.5rem;
+.quiz-title {
+  font-size: 4rem; /* Aumentamos el tamaño del texto */
   font-weight: bold;
-  margin-bottom: 40px;
-  color: #333;
-  text-transform: uppercase;
+  color: white;
+  background: linear-gradient(45deg, #ff8c00, #f00, #009900); /* Gradiente de colores llamativos */
+  -webkit-background-clip: text; /* Hace que el gradiente se aplique solo al texto */
+  background-clip: text; /* Compatibilidad con navegadores modernos */
+  text-align: center;
+  text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 255, 255, 0.4); /* Sombra más dramática */
+  animation: glow 1.5s ease-in-out infinite alternate; /* Animación de resplandor */
+  margin-bottom: 20px;
+}
+
+/* Animación de resplandor */
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 5px #00ff00, 0 0 10px #00ff00, 0 0 15px #00ff00, 0 0 25px #ffff00, 0 0 50px #ffff00, 0 0 100px #ffff00, 0 0 150px #ffff00;
+  }
+  25% {
+    text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00, 0 0 50px #ffff00, 0 0 100px #ffff00, 0 0 150px #ffff00, 0 0 200px #ffff00;
+  }
+  50% {
+    text-shadow: 0 0 20px #00ff00, 0 0 40px #00ff00, 0 0 60px #00ff00, 0 0 100px #ffff00, 0 0 200px #ffff00, 0 0 300px #ffff00, 0 0 400px #ffff00;
+  }
+  75% {
+    text-shadow: 0 0 30px #00ff00, 0 0 60px #00ff00, 0 0 90px #00ff00, 0 0 150px #ffff00, 0 0 300px #ffff00, 0 0 400px #ffff00, 0 0 500px #ffff00;
+  }
+  100% {
+    text-shadow: 0 0 40px #00ff00, 0 0 80px #00ff00, 0 0 120px #00ff00, 0 0 200px #ffff00, 0 0 400px #ffff00, 0 0 500px #ffff00, 0 0 600px #ffff00;
+  }
 }
 
 .username-container {
@@ -40,7 +64,7 @@ h1 {
 }
 
 .username {
-  --background: #29b6f6;
+  --background: #4ee031;
   --border-radius: 12px;
   font-size: 1.2rem;
   padding: 14px 20px;
@@ -60,8 +84,7 @@ h1 {
 }
 
 .start-button {
-  --background: #29b6f6;
-  --border-radius: 12px;
+  --background: #4ee031;  --border-radius: 12px;
   font-size: 1.3rem;
   padding: 14px 20px;
   color: white;
@@ -76,3 +99,26 @@ h1 {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3);
 }
 
+/* Botón de log out */
+.logout {
+  position: absolute; /* Permite posicionarlo libremente */
+  bottom: 10px; /* Distancia desde el borde inferior */
+  right: 10px; /* Distancia desde el borde derecho */
+  z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
+  --background: #29f644;
+  --border-radius: 12px;
+  font-size: 1.3rem;
+  padding: 10px 11px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Animación de glow para el botón de log out */
+.logout:hover {
+  transform: scale(1.05); /* Aumenta de tamaño */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Efecto de sombra */
+  animation: glow 1.5s ease-in-out infinite alternate; /* Resplandor */
+}

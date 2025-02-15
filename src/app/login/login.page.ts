@@ -17,7 +17,7 @@ import { IonContent, IonHeader, IonToolbar, IonTitle,
 })
 export class LoginPage implements OnInit {
 
-  constructor(private auth: AuthService, @Inject(DOCUMENT) public document: Document) { }
+  constructor(private auth: AuthService) { }
 
   login() {
 
@@ -28,13 +28,7 @@ export class LoginPage implements OnInit {
     });
   }
 
-logout(){
-  this.auth.logout ({
-    logoutParams:{
-      returnTo: this.document.location.origin
-    }
-  })
-}
+
 
 
 

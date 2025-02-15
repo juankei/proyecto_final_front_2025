@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core'; // Para la creación del componente y el ciclo de vida.
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { CommonModule } from '@angular/common'; // Necesario para las directivas básicas como ngIf, ngFor.
 import { FormsModule } from '@angular/forms'; // Para trabajar con formularios (ngModel).
 import { HttpClient } from '@angular/common/http'; // Para realizar solicitudes HTTP.
@@ -36,6 +37,8 @@ export class HomePage implements OnInit {
     private http: HttpClient, // Inyección del servicio HttpClient.
     private router: Router, // Inyección del servicio Router para navegación.
     private auth: AuthService, // Inyección del servicio AuthService de Auth0.
+    @Inject(DOCUMENT) public document: Document
+
   
   ) { }
 
@@ -95,7 +98,18 @@ export class HomePage implements OnInit {
     // Navega a la página '/preguntas'.
     this.router.navigate(['/preguntas', data]);
   }
+
+
+  logout(){
+    this.auth.logout ({
+      logoutParams:{
+        returnTo: this.document.location.origin
+      }
+    })
+  }
 }
+
+
 
 
 
