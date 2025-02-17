@@ -1,10 +1,27 @@
-<ion-content [fullscreen]="true">
-  <!-- Lista de puntuaciones -->
-  <div *ngFor="let score of score_data" class="score-item">
-    <!-- Usamos ion-list para contener los elementos -->
-    <p class="username-label">{{ score.usuario_id }}</p>
-    <p class="score-label">{{ score.puntos }}</p>
-  </div>
+<ion-content>
+  <ion-grid class="small-table">
+    <ion-row>
+      <!-- Cabecera de la tabla -->
+      <ion-col size="6" class="header-column">
+        Jugador
+      </ion-col>
+      <ion-col size="6" class="header-column">
+        Puntuación
+      </ion-col>
+    </ion-row>
+
+    <!-- Usamos *ngFor para recorrer los datos -->
+    <ion-row *ngFor="let score of score_data" class="score-item">
+      <ion-col size="6" class="score-column">
+        {{ score.id }}
+      </ion-col>
+      <ion-col size="6" class="score-column">
+        {{ score.puntos }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
+
+
 
 

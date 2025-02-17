@@ -1,52 +1,51 @@
 ion-content {
-    --background: linear-gradient(180deg, #a5d6a7, #81c784); /* Fondo verde suave, estilo césped de campo */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    color: #333;
-    font-family: 'Open Sans', Arial, sans-serif; /* Fuente más legible y moderna */
-    height: 100vh;
-    justify-content: flex-start;
-    position: relative;
-    animation: fadeIn 0.5s ease-out;
-  }
+  --background: #f4f7fa; /* Fondo suave para el ion-content */
+  padding: 20px; /* Relleno para dar espacio alrededor de la tabla */
+}
 
-/* El contenedor de los puntajes, ajustado para que no ocupe toda la pantalla */
+.football-table {
+  max-width: 800px; /* Hacer la tabla más grande */
+  margin: 0 auto; /* Centrar la tabla */
+}
+
+ion-grid {
+  --ion-grid-column-padding: 0;
+}
+
+.header-column {
+  font-weight: bold;
+  text-align: center;
+  background-color: #28a745; /* Verde característico del fútbol */
+  color: white;
+  padding: 14px 0;
+  border-radius: 8px;
+  font-size: 18px; /* Aumentar el tamaño de la letra */
+}
+
 .score-item {
-  background-color: rgba(255, 255, 255, 0.9);  /* Fondo blanco semitransparente */
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 16px;
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 80%;  /* No ocupa toda la pantalla */
-  max-width: 500px;  /* Máximo tamaño para el div */
-  transition: transform 0.3s ease-in-out;
-  text-align: center;  /* Asegura que el texto dentro del div esté centrado */
-  position: absolute; /* Para poder controlar el posicionamiento de manera absoluta */
-  top: 10%; /* Posicionamos el contenedor a la mitad de la pantalla */
-  left: 10%; /* Posicionamos el contenedor a la mitad de la pantalla */
+  border-bottom: 1px solid #28a745; /* Borde verde para separar las filas */
 }
-/* Hover para darle un toque interactivo */
+
+.score-column {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 20px; /* Aumentar el tamaño de la fuente */
+  border-radius: 8px;
+  color: #333; /* Color de texto negro para buena legibilidad */
+}
+
+.score-column:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+.score-column:nth-child(even) {
+  background-color: #f0f8f0; /* Fondo blanco con un toque suave de verde */
+}
+
 .score-item:hover {
-  transform: scale(1.05);
+  background-color: #d4f1d4; /* Efecto hover con un fondo verde claro */
 }
 
-/* Estilo del nombre de usuario */
-.username-label {
-  font-size: 18px;
-  font-weight: bold;
-  color: #4f4f4f;
-  margin: 0;
-}
-
-/* Estilo de la puntuación */
-.score-label {
-  font-size: 20px;
-  font-weight: bold;
-  color: #ff6f61;  /* Un color cálido para la puntuación */
-  margin: 0;
+ion-row {
+  margin-bottom: 15px; /* Más espacio entre las filas */
 }

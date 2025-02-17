@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { IonContent, IonHeader, IonToolbar, IonTitle,
   IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
-   IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonButtons,IonModal,IonRadio,IonItem } from '@ionic/angular/standalone';
+   IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonButtons,IonModal,IonRadio,IonItem,IonGrid,IonRow,IonCol} from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-puntuacion',
@@ -17,7 +17,7 @@ import { IonContent, IonHeader, IonToolbar, IonTitle,
   standalone: true,
   imports: [CommonModule, FormsModule, IonContent, IonHeader, IonToolbar, IonTitle,
     IonList, IonIcon, IonMenu, IonLabel, IonRouterOutlet,
-     IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonModal,IonButtons,IonRadio,IonItem]
+     IonMenuButton, IonMenuToggle, IonListHeader, IonButton,IonModal,IonButtons,IonRadio,IonItem,IonGrid,IonRow,IonCol]
 })
 export class PuntuacionPage implements OnInit {
 
