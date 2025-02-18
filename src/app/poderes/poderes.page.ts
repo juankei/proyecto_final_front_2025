@@ -56,10 +56,7 @@ export class PoderesPage implements OnInit {
           
         }
 
-        if (this.puntos < 0 ){
-          this.puntos = 0
-        }
-        
+
         this.addScore()
       }
     });
@@ -67,6 +64,11 @@ export class PoderesPage implements OnInit {
   }
 
   addScore() {
+
+    if (this.puntos < 0 ){
+      this.puntos = 0
+      console.log('puntuacion menor a cero')
+    }
  
     let score_final = { score: this.puntos, id : this.email };
    
