@@ -55,6 +55,11 @@ export class PoderesPage implements OnInit {
           console.log(this.puntos)
           
         }
+
+        if (this.puntos < 0 ){
+          this.puntos = 0
+        }
+        
         this.addScore()
       }
     });
