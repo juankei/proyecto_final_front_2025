@@ -1,6 +1,6 @@
 /* Aseguramos que ion-content ocupe toda la pantalla */
 ion-content {
-    --background: linear-gradient(180deg, #f9f9f9, #e0f7fa); /* Fondo claro con toque vibrante */
+--background: linear-gradient(180deg, #a5d6a7, #81c784); /* Fondo verde suave, estilo césped de campo */
     height: 100vh; /* Asegura que ion-content ocupe toda la altura de la pantalla */
     padding: 0; /* Elimina cualquier padding adicional */
     color: #333; /* Color del texto oscuro */
@@ -43,7 +43,7 @@ ion-content {
 .power-title {
   font-size: 2rem;
   font-weight: bold;
-  color: #ffcb00; /* Color dorado */
+  color: #4ee031; /* Color dorado */
   margin-bottom: 10px;
   text-transform: uppercase;
   text-align: center; /* Asegura que el título esté centrado */
@@ -68,4 +68,14 @@ ion-content {
     }
   }
   
+.start-button {
+  --background: #4ee031;  --border-radius: 12px;
+  font-size: 1.3rem;
+  padding: 14px 20px;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
   

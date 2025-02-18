@@ -30,7 +30,7 @@ ion-content {
   font-size: 4rem; /* Aumentamos el tamaño del texto */
   font-weight: bold;
   color: white;
-  background: linear-gradient(45deg, #ff8c00, #f00, #009900); /* Gradiente de colores llamativos */
+  background: linear-gradient(45deg, #4caf50, #388e3c, #66bb6a); /* Gradiente verde para el título */
   -webkit-background-clip: text; /* Hace que el gradiente se aplique solo al texto */
   background-clip: text; /* Compatibilidad con navegadores modernos */
   text-align: center;
@@ -64,11 +64,11 @@ ion-content {
 }
 
 .username {
-  --background: #4ee031;
+  --background: #00ff00; /* Naranja brillante para el botón */
   --border-radius: 12px;
   font-size: 1.2rem;
   padding: 14px 20px;
-  color: white;
+  color: rgb(255, 255, 255);
   font-weight: bold;
   text-transform: uppercase;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
@@ -84,7 +84,8 @@ ion-content {
 }
 
 .start-button {
-  --background: #4ee031;  --border-radius: 12px;
+  --background: #00ff00; /* Naranja brillante para el botón */
+  --border-radius: 12px;
   font-size: 1.3rem;
   padding: 14px 20px;
   color: white;
@@ -105,7 +106,7 @@ ion-content {
   bottom: 10px; /* Distancia desde el borde inferior */
   right: 10px; /* Distancia desde el borde derecho */
   z-index: 10; /* Asegura que el botón esté por encima de otros elementos */
-  --background: #29f644;
+  --background: #d32f2f; /* Rojo brillante para el log out */
   --border-radius: 12px;
   font-size: 1.3rem;
   padding: 10px 11px;

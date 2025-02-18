@@ -1,14 +1,16 @@
 ion-content {
-  --background: #f4f7fa; /* Fondo suave para el ion-content */
+  --background: linear-gradient(180deg, #a5d6a7, #81c784); /* Fondo verde suave, estilo césped de campo */
   padding: 20px; /* Relleno para dar espacio alrededor de la tabla */
+  display: flex;
+  justify-content: center; /* Centra la tabla en el contenedor */
+
 }
 
-.football-table {
-  max-width: 800px; /* Hacer la tabla más grande */
-  margin: 0 auto; /* Centrar la tabla */
-}
 
 ion-grid {
+
+  width: 80%;
+  margin-top: 40px; /* Ajusta el margen superior */
   --ion-grid-column-padding: 0;
 }
 
@@ -17,21 +19,19 @@ ion-grid {
   text-align: center;
   background-color: #28a745; /* Verde característico del fútbol */
   color: white;
-  padding: 14px 0;
+  padding: 12px 0; /* Relleno reducido */
   border-radius: 8px;
-  font-size: 18px; /* Aumentar el tamaño de la letra */
+  font-size: 16px; /* Ajustar el tamaño de la letra */
 }
 
-.score-item {
-  border-bottom: 1px solid #28a745; /* Borde verde para separar las filas */
-}
+
 
 .score-column {
   text-align: center;
-  padding: 20px 0;
-  font-size: 20px; /* Aumentar el tamaño de la fuente */
+  padding: 10px 0; /* Relleno reducido */
+  font-size: 16px; /* Ajustar el tamaño de la fuente */
   border-radius: 8px;
-  color: #333; /* Color de texto negro para buena legibilidad */
+  color: #333; /* Color de texto */
 }
 
 .score-column:nth-child(odd) {
@@ -39,13 +39,9 @@ ion-grid {
 }
 
 .score-column:nth-child(even) {
-  background-color: #f0f8f0; /* Fondo blanco con un toque suave de verde */
-}
-
-.score-item:hover {
-  background-color: #d4f1d4; /* Efecto hover con un fondo verde claro */
+  background-color: #ffffff; /* Fondo blanco con un toque suave de verde */
 }
 
 ion-row {
-  margin-bottom: 15px; /* Más espacio entre las filas */
+  margin-bottom: 10px; /* Reducir el espacio entre las filas */
 }

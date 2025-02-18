@@ -149,6 +149,10 @@ ion-content {
   margin-top: 30px;
 }
 
+ion-modal .modal-wrapper {
+  --background: #ffffff; /* Fondo blanco para el modal */
+}
+
 
 /* Estilos personalizados para el modal */
 .modal-content {
@@ -178,9 +182,9 @@ ion-content {
 }
 
 ion-toolbar {
-  --background: #387ef5; /* Color azul claro */
-  --color: white;
-  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 ion-title.title {
@@ -200,7 +204,7 @@ ion-button[color="medium"]:hover {
 }
 
 .description-text {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   color: #333;
   text-align: center;
   margin-bottom: 20px;
