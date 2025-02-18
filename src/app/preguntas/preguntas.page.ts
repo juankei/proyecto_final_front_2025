@@ -25,8 +25,8 @@ export class PreguntasPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
 
   // URL de la API
-  public url: string = 'http://localhost:3000';
-  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  //public url: string = 'http://localhost:3000';
+  public url: string = 'https://proyecto-final-back-2025.onrender.com';
  public connectedUsers: any[] = []; // Lista de usuarios conectados
 
  

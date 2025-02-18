@@ -1,6 +1,6 @@
 /* Estilo para el ion-content */
 ion-content {
-  --background: linear-gradient(180deg, #a5d6a7, #81c784); /* Fondo verde suave, estilo césped de campo */
+  --background: linear-gradient(180deg, #a5d6a7, #349b39);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -35,7 +35,7 @@ ion-content {
 .username {
   font-size: 1.6rem;
   font-weight: bold;
-  color: #ffeb3b; /* Amarillo fútbol */
+  color: #ec4d25; /* Amarillo fútbol */
   padding: 12px 18px;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.8), rgba(255, 235, 59, 0.3)); /* Degradado del balón */
   border-radius: 12px;
@@ -149,10 +149,7 @@ ion-content {
   margin-top: 30px;
 }
 
-ion-modal .modal-wrapper {
-  --background: #ffffff; /* Fondo blanco para el modal */
-}
-
+/* Asegúrate de que el fondo del modal se cambie con esta clase */
 
 /* Estilos personalizados para el modal */
 .modal-content {
@@ -181,10 +178,9 @@ ion-modal .modal-wrapper {
   margin-top: 20px;
 }
 
-ion-toolbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+ion-modal ion-toolbar {
+  --background: rgb(142, 144, 14);
+  --color: white;
 }
 
 ion-title.title {
@@ -277,3 +273,5 @@ ion-item ion-radio {
   margin: 0;
   color: #666; /* Texto gris */
 }
+
+
