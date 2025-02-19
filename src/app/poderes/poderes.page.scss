@@ -1,6 +1,7 @@
 /* Aseguramos que ion-content ocupe toda la pantalla */
 ion-content {
---background: linear-gradient(180deg, #a5d6a7, #81c784); /* Fondo verde suave, estilo césped de campo */
+  --background: linear-gradient(180deg, #a5d6a7, #349b39); /* Fondo verde suave, estilo césped de campo */
+
     height: 100vh; /* Asegura que ion-content ocupe toda la altura de la pantalla */
     padding: 0; /* Elimina cualquier padding adicional */
     color: #333; /* Color del texto oscuro */

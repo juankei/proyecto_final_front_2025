@@ -26,8 +26,8 @@ import { IonContent, IonHeader, IonToolbar, IonTitle, // Componentes de Ionic.
 })
 export class HomePage implements OnInit {
   public user_name: any;
-  public url: string = 'http://localhost:3000'; // URL del backend.
-  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  //public url: string = 'http://localhost:3000'; // URL del backend.
+  public url: string = 'https://proyecto-final-back-2025.onrender.com';
 
   public username: string = ''; // Nombre de usuario.
   public auth_user: any; // Usuario autenticado.
