@@ -25,8 +25,8 @@ export class PreguntasPage implements OnInit {
   @ViewChild(IonModal) modal!: IonModal;
 
   // URL de la API
-  //public url: string = 'http://localhost:3000';
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000';
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
  public connectedUsers: any[] = []; // Lista de usuarios conectados
 
  
@@ -53,7 +53,7 @@ export class PreguntasPage implements OnInit {
   public interval: any; // Variable para manejar el intervalo
   public answers_data: any = []; // Respuestas posibles de la pregunta
   public input_answers: any; // Respuesta seleccionada
-  public correct_answers_row: number = 3; // Respuestas correctas consecutivas
+  public correct_answers_row: number = 4; // Respuestas correctas consecutivas
 
   public isButtonVisible: boolean = true; // Control de visibilidad del botón
   //public doubleScore : boolean = false
@@ -157,7 +157,7 @@ export class PreguntasPage implements OnInit {
          
         }, 1000);
       }
-      if (this.questionNumber == 16){
+      if (this.questionNumber == 24){
         let juankei = {
           email : this.user_login.email,
           score : this.score
@@ -169,7 +169,7 @@ export class PreguntasPage implements OnInit {
       
      
   
-    }, 30); // Intervalo de 50ms
+    }, 40); // Intervalo de 50ms
   }
 
   // Carga la siguiente pregunta desde la API
@@ -301,6 +301,8 @@ restart() {
     if (input_power == 'removePoints'){
       console.log('remove acitive ')
       this.userConect()
+      this.disabled_power = false
+      
       
       
     }
@@ -315,6 +317,7 @@ restart() {
       clearInterval(this.counter_double_points)
       this.double_points = 1
       this.pista = false
+      this.disabled_power = false
       console.log('poder inactivo')
     
     }, 15000);
@@ -351,13 +354,17 @@ restart() {
       (response: any) => {
         // La respuesta contiene los datos actualizados
         console.log(response);
-        this.disabled_power = true
+        
+          this.disabled_power = true
+     
+        
   
         // Acceder a los datos del usuario actualizado
         if (input_userPoint){
         }else{
           this.score = response.updatedUser.puntos;
         console.log(`Puntuación actualizada: ${this.updatedUser.puntos}`);
+         
         }
         // Puedes pasar los datos a tu UI o actualizar el estado en tu componente
          // Mostrar los datos actualizados

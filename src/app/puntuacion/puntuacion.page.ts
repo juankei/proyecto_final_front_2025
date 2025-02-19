@@ -33,8 +33,8 @@ export class PuntuacionPage implements OnInit {
   
   counter : number = 0
   interval : any
-  //public url: string = 'http://localhost:3000'
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000'
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
   
   public input_score : any
   public score_data : any = []

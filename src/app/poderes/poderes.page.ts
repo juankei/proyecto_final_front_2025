@@ -29,8 +29,8 @@ export class PoderesPage implements OnInit {
   public score : any 
   public puntos : number = 0
   public email : any
-  //public url: string = 'http://localhost:3000';
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000';
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
   public input_data : any
   public score_users : any = []
   ngOnInit() {

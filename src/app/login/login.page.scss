@@ -49,6 +49,16 @@ ion-content {
     animation: glow 1.5s ease-in-out infinite alternate; /* Animación de resplandor */
     margin-bottom: 20px;
   }
+
+  .quiz-subtitle{
+    background: linear-gradient(45deg, #ff8c00, #f00, #009900); /* Gradiente de colores llamativos */
+    -webkit-background-clip: text; /* Hace que el gradiente se aplique solo al texto */
+    background-clip: text; /* Compatibilidad con navegadores modernos */
+    text-align: center;
+    text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.7), 0 0 25px rgba(255, 255, 255, 0.4); /* Sombra más dramática */
+    animation: glow 1.5s ease-in-out infinite alternate; /* Animación de resplandor */
+    margin-bottom: 20px;
+  }
   
   /* Animación de resplandor */
   @keyframes glow {

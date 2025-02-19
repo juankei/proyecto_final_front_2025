@@ -26,8 +26,8 @@ import { IonContent, IonHeader, IonToolbar, IonTitle, // Componentes de Ionic.
 })
 export class HomePage implements OnInit {
   public user_name: any;
-  //public url: string = 'http://localhost:3000'; // URL del backend.
-  public url: string = 'https://proyecto-final-back-2025.onrender.com';
+  public url: string = 'http://localhost:3000'; // URL del backend.
+  //public url: string = 'https://proyecto-final-back-2025.onrender.com';
 
   public username: string = ''; // Nombre de usuario.
   public auth_user: any; // Usuario autenticado.
@@ -56,7 +56,8 @@ export class HomePage implements OnInit {
     this.http.get(`${this.url}/user/${this.auth_user.email}`).subscribe((response) => {
       console.log(response);
       this.db_user = response;
-      if(response === 'usuario no encontrado') {
+      if (response == 'user not found') {
+        console.log('vamos a crearte')
         this.createUser();
       }
     });
