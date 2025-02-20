@@ -53,7 +53,7 @@ export class PreguntasPage implements OnInit {
   public interval: any; // Variable para manejar el intervalo
   public answers_data: any = []; // Respuestas posibles de la pregunta
   public input_answers: any; // Respuesta seleccionada
-  public correct_answers_row: number = 4; // Respuestas correctas consecutivas
+  public correct_answers_row: number = 0; // Respuestas correctas consecutivas
 
   public isButtonVisible: boolean = true; // Control de visibilidad del botón
   //public doubleScore : boolean = false
@@ -157,7 +157,7 @@ export class PreguntasPage implements OnInit {
          
         }, 1000);
       }
-      if (this.questionNumber == 24){
+      if (this.questionNumber == 31){
         let juankei = {
           email : this.user_login.email,
           score : this.score
@@ -169,7 +169,7 @@ export class PreguntasPage implements OnInit {
       
      
   
-    }, 95); // Intervalo de 50ms
+    }, 90); // Intervalo de 50ms
   }
 
   // Carga la siguiente pregunta desde la API
