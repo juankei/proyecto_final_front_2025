@@ -169,7 +169,7 @@ export class PreguntasPage implements OnInit {
       
      
   
-    }, 90); // Intervalo de 50ms
+    }, 70); // Intervalo de 50ms
   }
 
   // Carga la siguiente pregunta desde la API
